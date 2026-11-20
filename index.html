@@ -115,6 +115,11 @@ footer{text-align:center;color:var(--mut);padding:30px 14px calc(30px + env(safe
 .pwi{-webkit-text-security:disc;text-security:disc}
 .box input,.box select,.box textarea{font-size:16px}
 footer p{margin:4px 0}
+.osn{font-size:11px;color:var(--mut);margin:0 0 6px;line-height:1.5}.osn a{color:var(--a)}
+#totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:35;width:44px;height:44px;border-radius:99px;border:1px solid var(--bd);background:var(--card);backdrop-filter:blur(14px);color:var(--fg);font-size:18px;box-shadow:0 8px 20px rgba(0,0,0,.18);transition:.25s;opacity:0;translate:0 10px;pointer-events:none}
+#totop.show{opacity:1;translate:0 0;pointer-events:auto}
+#totop:hover{translate:0 -4px;scale:1.08}
+.adm-on #totop{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .vh{margin-top:10px;font-size:12px;color:var(--mut)}
 .vh summary{cursor:pointer;user-select:none}
 .vh ul{list-style:none;padding:0;margin:6px 0 0;display:inline-flex;flex-direction:column;gap:2px}
@@ -161,7 +166,7 @@ main{padding:10px 12px 90px}
 <div id="splash"><div id="sc"></div><b>たちこくナビ</b><small id="sp">0%</small></div>
 <header>
   <div class="logo" id="logo"><span class="lg"></span><span>たちこく<em>ナビ</em></span></div>
-  <div class="hb"><button id="th" title="テーマ切替">🌓</button><button id="abt">ℹ️ 当サイトについて</button><button id="lock">🔒 管理</button></div>
+  <div class="hb"><button id="cmj" title="コメント欄へ移動">💬 コメント欄へ</button><button id="th" title="テーマ切替">🌓</button><button id="abt">ℹ️ 当サイトについて</button><button id="lock">🔒 管理</button></div>
 </header>
 <main id="home">
   <div class="tbw"><nav class="tabs" id="tabs"><i id="ind"></i><button class="on" data-t="ranges">📄 範囲表</button><button data-t="tasks">📝 課題</button><button data-t="news">📢 お知らせ<span class="x">・ニュース</span></button><button data-t="events">📅 日程</button></nav></div>
@@ -177,7 +182,7 @@ main{padding:10px 12px 90px}
   <section class="cdn" id="cdn"></section>
   <div id="nb" class="nbn"></div>
   <div class="tkw"><div class="tk" id="tk"></div></div>
-  <div class="sbw"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a></div>
+  <div class="sbw"><p class="osn">STUDIXはオープンソース（<a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a></div>
     <div class="tools"><input id="q" placeholder="🔍 検索（/ キーで移動）"><div id="chips" style="display:contents"></div></div>
   <div class="grid" id="grid"></div>
 <section id="cm"><h2>💬 みんなのコメント</h2><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
@@ -212,16 +217,18 @@ main{padding:10px 12px 90px}
   <p>不具合やご要望は、管理者に直接お伝えください。コメント欄への書き込みでも、意見を受け付けています。</p>
   <h2>おすすめ：STUDIX</h2>
   <p>学習管理アプリ「STUDIX」もあわせてどうぞ。テスト勉強の計画づくりに役立ちます。</p>
-  <div class="sbw"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 STUDIXを開く →</a></div>
+  <div class="sbw"><p class="osn">STUDIXはオープンソース（<a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 STUDIXを開く →</a></div>
   <p style="margin-top:26px"><a class="btn" href="#home" style="display:inline-block;text-decoration:none">← ホームへ戻る</a></p>
 </main>
 <footer><p id="ft"></p><p>このサイトは検索しても出てきません。不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p>
 <details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-20　v3.1.0</li>
 <li>2026-11-20　v3.0.0</li>
 <li>2026-11-19　v2.2.3</li>
 <li>2026-11-19　v2.2.2</li>
 <li>2026-11-19　v2.2.1</li>
 <li>2026-11-19　v2.2.0</li>
+<li>2026-11-19　v2.1.1</li>
 <li>2026-11-18　v2.1.0</li>
 <li>2026-11-18　v2.0.0</li>
 <li>2026-11-18　v1.0.0</li>
@@ -229,6 +236,7 @@ main{padding:10px 12px 90px}
 <div id="fab"><span>🔓 管理者</span><button class="btn" data-add="ranges">＋範囲表</button><button class="btn" data-add="tasks">＋課題</button><button class="btn" data-add="news">＋お知らせ</button><button class="btn" data-add="events">＋日程</button><button class="btn g" id="out">ログアウト</button></div>
 <div class="md" id="md" hidden><div class="box" id="bx"></div></div>
 <div id="toast"></div>
+<button id="totop" title="一番上に戻る" hidden>⬆</button>
 <script>
 /* ★★★ Supabase の設定（チャットの手順で取得した値を貼る）★★★ */
 const SB_URL='https://lmsltsroicnapujzesio.supabase.co';              // 例: https://xxxxxxxx.supabase.co
@@ -267,7 +275,7 @@ async function load(first){
  if(!SB){S.ranges=LS('tn_ranges');S.tasks=LS('tn_tasks').filter(x=>!(dys(x.due)<=-3));SV('tn_tasks',S.tasks);S.news=LS('tn_news');S.events=LS('tn_events');CMT=LS('tn_comments');S.l=1;render(first);drawC();return}
  if(first)api('/rest/v1/rpc/purge_old_tasks',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});
  try{const [a,b,c,ev,t]=await Promise.all([...['ranges','tasks','news'].map(x=>api('/rest/v1/'+x+'?select=*')),api('/rest/v1/events?select=*').catch(()=>[]),api('/rest/v1/comments?select=*&parent_id=is.null&order=pinned.desc,ts.desc&limit='+(CN+1)).catch(()=>api('/rest/v1/comments?select=*&parent_id=is.null&order=ts.desc&limit='+(CN+1)))]);HM=t.length>CN;const tp=t.slice(0,CN),rp=tp.length?await api('/rest/v1/comments?select=*&order=ts.asc&parent_id=in.('+tp.map(x=>x.id).join(',')+')'):[];S.ranges=a;S.tasks=b.filter(x=>!(dys(x.due)<=-3));if(AD&&TOK)b.filter(x=>dys(x.due)<=-3).forEach(x=>api('/rest/v1/tasks?id=eq.'+encodeURIComponent(x.id),{method:'DELETE'}).then(()=>delF(x.url)).catch(()=>{}));S.news=c;S.events=ev;CMT=[...tp,...rp];IPM={};if(AD&&TOK&&CMT.length){try{(await api('/rest/v1/comment_ips?select=comment_id,ip&comment_id=in.('+CMT.map(x=>x.id).join(',')+')')).forEach(x=>IPM[x.comment_id]=x.ip)}catch(e){}}S.l=1;render(first);drawC()}catch(e){S.l=1;render(first);toast('データを読み込めませんでした')}}
-load(1);$('#ft').textContent='🧭 たちこくナビ v3.0.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
+load(1);$('#ft').textContent='🧭 たちこくナビ v3.1.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
 if(SB)setInterval(()=>{if($('#md').hidden&&!document.hidden)load()},60000);
 const delF=u=>{const p=(u||'').split('/public/files/')[1];if(p&&SB)api('/storage/v1/object/files/'+p,{method:'DELETE'}).catch(()=>{})};
 async function save(t,o,file){
@@ -359,7 +367,7 @@ addEventListener('keydown',e=>{if(e.key=='Escape')cl();if(e.key=='/'&&!/INPUT|TE
 kb.push(e.key);kb=kb.slice(-10);if(kb.join()==KO){document.body.classList.toggle('rb');toast('🌈 レインボーモード！');}});
 const nrm=s=>s.normalize('NFKC').replace(/[\s\u3000\u200B-\u200F\u2028-\u202F\u2060-\u206F\uFEFF\u00AD]/g,'');
 const resv=n=>/管理人|管理者|運営|かんりにん|カンリニン|認証済|^(admin|administrator|moderator)$|[✅✔☑]/.test(nrm(n).toLowerCase().replace(/[^a-z0-9ぁ-んァ-ヶー一-龯々✅✔☑]/g,''));
-function cardC(c,rp){return `<div class="ci${rp?' rp':''}${c.pinned?' pin':''}"><b>${E(!c.admin&&resv(c.name)?'名無しさん':c.name)}</b>${c.admin?'<span class="vf">✅ 認証済み</span>':''}${c.pinned?'<span class="vf" style="color:var(--b);border-color:var(--b)">📌 固定</span>':''} <small>${new Date(+c.ts).toLocaleString('ja-JP')}</small><p style="white-space:pre-wrap">${E(c.text)}</p><button class="lk${LKL.has(c.id)?' on':''}" data-lk="${E(c.id)}">👍 ${c.likes||0}</button> <button class="lk" data-rp="${E(c.id)}">↩ 返信</button> ${!c.parent_id?`<button class="cx" data-pin="${E(c.id)}">${c.pinned?'📌 固定解除':'📌 固定'}</button> `:''}<button class="cx" data-cd="${E(c.id)}">🗑 削除</button>${AD&&IPM[c.id]?`<small class="ipt"> 🌐 ${E(IPM[c.id])}</small>`:''}</div>`}
+function cardC(c,rp){return `<div class="ci${rp?' rp':''}${c.pinned?' pin':''}"><b>${E(!c.admin&&resv(c.name)?'名無しさん':c.name)}</b>${c.admin?'<span class="vf">✅ 認証済み</span>':''}${c.pinned?'<span class="vf" style="color:var(--b);border-color:var(--b)">📌 固定</span>':''}${Date.now()-(+c.ts)<64800000?'<span class="vf" style="color:var(--c);border-color:var(--c)">🆕 新規</span>':''} <small>${new Date(+c.ts).toLocaleString('ja-JP')}</small><p style="white-space:pre-wrap">${E(c.text)}</p><button class="lk${LKL.has(c.id)?' on':''}" data-lk="${E(c.id)}">👍 ${c.likes||0}</button> <button class="lk" data-rp="${E(c.id)}">↩ 返信</button> ${!c.parent_id?`<button class="cx" data-pin="${E(c.id)}">${c.pinned?'📌 固定解除':'📌 固定'}</button> `:''}<button class="cx" data-cd="${E(c.id)}">🗑 削除</button>${AD&&IPM[c.id]?`<small class="ipt"> 🌐 ${E(IPM[c.id])}</small>`:''}</div>`}
 function drawC(){let tp=CMT.filter(c=>!c.parent_id).sort((a,b)=>(!!b.pinned-!!a.pinned)||b.ts-a.ts),more=HM;if(!SB){more=tp.length>CN;tp=tp.slice(0,CN)}
 $('#cl').innerHTML=(tp.length?tp.map(c=>cardC(c)+CMT.filter(r=>r.parent_id==c.id).sort((a,b)=>a.ts-b.ts).map(r=>cardC(r,1)).join('')).join(''):'<p class="empty" style="padding:20px">まだコメントはありません。最初の1件を書いてみよう！</p>')+(more?'<p style="text-align:center;margin-top:14px"><button class="btn g" id="more">⬇ もっと見る（20件ずつ）</button></p>':'')}
 function setRT(c){RT=c?{id:c.parent_id||c.id,name:c.name,pre:c.parent_id?'@'+c.name+' ':''}:null;const b=$('#rpl');b.hidden=!RT;if(!RT)b.innerHTML='';if(RT){b.innerHTML=`<span>↩ 「${E(RT.name)}」に返信中</span><button class="lk" id="rx">✕ やめる</button>`;if(RT.pre&&!$('#ct').value)$('#ct').value=RT.pre;$('.cmf').scrollIntoView({behavior:'smooth',block:'center'});$('#ct').focus()}}
@@ -376,6 +384,8 @@ const k=e.target.closest('[data-lk]');if(k){const id=k.dataset.lk,on=!LKL.has(id
 const b=e.target.closest('.cx');if(!b)return;const id=b.dataset.cd;try{if(SB){await api('/rest/v1/comments?id=eq.'+encodeURIComponent(id),{method:'DELETE'});await load()}else{CMT=CMT.filter(c=>c.id!=id&&c.parent_id!=id);SV('tn_comments',CMT);drawC()}toast('🗑 削除しました')}catch(x){fail(x,'削除できませんでした')}};
 /* ---- about page routing ---- */
 const hh=()=>document.documentElement.style.setProperty('--hh',$('header').offsetHeight+'px');hh();addEventListener('resize',hh);document.fonts&&document.fonts.ready.then(hh);
+$('#cmj').onclick=()=>{if(location.hash=='#about')location.hash='home';setTimeout(()=>$('#cm').scrollIntoView({behavior:'smooth',block:'start'}),location.hash=='#about'?250:0)};
+const tt_=$('#totop');addEventListener('scroll',()=>tt_.classList.toggle('show',scrollY>500),{passive:true});tt_.onclick=()=>scrollTo({top:0,behavior:'smooth'});
 function route(){const a=location.hash=='#about';$('#home').hidden=a;$('#ab').hidden=!a;$('#abt').textContent=a?'← ホームへ':'ℹ️ 当サイトについて';scrollTo(0,0);if(!a)setTimeout(ind,30)}
 addEventListener('hashchange',route);$('#abt').onclick=()=>{location.hash=location.hash=='#about'?'home':'about'};route();
 </script>
