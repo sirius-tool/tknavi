@@ -115,6 +115,9 @@ footer{text-align:center;color:var(--mut);padding:30px 14px calc(30px + env(safe
 .pwi{-webkit-text-security:disc;text-security:disc}
 .box input,.box select,.box textarea{font-size:16px}
 footer p{margin:4px 0}
+.vh{margin-top:10px;font-size:12px;color:var(--mut)}
+.vh summary{cursor:pointer;user-select:none}
+.vh ul{list-style:none;padding:0;margin:6px 0 0;display:inline-flex;flex-direction:column;gap:2px}
 .tbw{position:sticky;top:calc(var(--hh,60px) + env(safe-area-inset-top,0px));z-index:25;display:flex;justify-content:center;padding:8px 6px 10px;margin:0 -6px;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 72%,transparent)}
 .cdn{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:6px 0 18px}
 .cdc{background:var(--card);border:1px solid var(--bd);border-top:4px solid hsl(var(--h) 85% 58%);border-radius:18px;padding:12px 14px;text-align:center;transition:.25s;min-width:0}
@@ -148,7 +151,7 @@ main{padding:10px 12px 90px}
 .ci.pin{border-color:var(--b);box-shadow:0 0 0 2px color-mix(in srgb,var(--b) 20%,transparent)}.ipt{color:var(--mut);font-size:11px}
 .ci.rp{margin-left:28px;border-left:3px solid var(--a)}.vf{color:var(--a);font-weight:700;font-size:12px;border:1px solid var(--a);border-radius:99px;padding:0 8px;margin-left:6px}
 .rpb{display:flex;justify-content:space-between;align-items:center;gap:8px;background:color-mix(in srgb,var(--a) 14%,transparent);border-radius:12px;padding:6px 12px;font-size:13px}
-.lk{background:none;border:1px solid var(--bd);border-radius:99px;padding:2px 12px;font-size:13px;transition:.2s}.lk:hover{translate:0 -3px;scale:1.1;border-color:var(--a)}.lk.on{background:var(--a);color:#001;border-color:var(--a)}.lk:active{scale:.9}
+.lk{background:none;border:1px solid var(--bd);border-radius:99px;padding:2px 12px;font-size:13px;transition:.2s}#fp.lk{border:0;text-decoration:underline;color:var(--mut)}.lk:hover{translate:0 -3px;scale:1.1;border-color:var(--a)}.lk.on{background:var(--a);color:#001;border-color:var(--a)}.lk:active{scale:.9}
 .pg h2{margin:30px 0 8px;font-size:22px;border-left:5px solid var(--a);padding-left:12px}.pg p,.pg li{color:var(--mut);margin:6px 0}.pg ul{padding-left:22px}.pg .lead{font-size:17px;color:var(--fg)}
 .fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:14px}.fc{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;transition:.25s}.fc:hover{translate:0 -8px;scale:1.03;box-shadow:0 16px 36px color-mix(in srgb,var(--b) 30%,transparent)}.fc b{font-size:17px}
 </style>
@@ -212,7 +215,17 @@ main{padding:10px 12px 90px}
   <div class="sbw"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 STUDIXを開く →</a></div>
   <p style="margin-top:26px"><a class="btn" href="#home" style="display:inline-block;text-decoration:none">← ホームへ戻る</a></p>
 </main>
-<footer><p id="ft"></p><p>このサイトは検索しても出てきません。不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p></footer>
+<footer><p id="ft"></p><p>このサイトは検索しても出てきません。不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p>
+<details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-20　v3.0.0</li>
+<li>2026-11-19　v2.2.3</li>
+<li>2026-11-19　v2.2.2</li>
+<li>2026-11-19　v2.2.1</li>
+<li>2026-11-19　v2.2.0</li>
+<li>2026-11-18　v2.1.0</li>
+<li>2026-11-18　v2.0.0</li>
+<li>2026-11-18　v1.0.0</li>
+</ul></details></footer>
 <div id="fab"><span>🔓 管理者</span><button class="btn" data-add="ranges">＋範囲表</button><button class="btn" data-add="tasks">＋課題</button><button class="btn" data-add="news">＋お知らせ</button><button class="btn" data-add="events">＋日程</button><button class="btn g" id="out">ログアウト</button></div>
 <div class="md" id="md" hidden><div class="box" id="bx"></div></div>
 <div id="toast"></div>
@@ -254,7 +267,7 @@ async function load(first){
  if(!SB){S.ranges=LS('tn_ranges');S.tasks=LS('tn_tasks').filter(x=>!(dys(x.due)<=-3));SV('tn_tasks',S.tasks);S.news=LS('tn_news');S.events=LS('tn_events');CMT=LS('tn_comments');S.l=1;render(first);drawC();return}
  if(first)api('/rest/v1/rpc/purge_old_tasks',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});
  try{const [a,b,c,ev,t]=await Promise.all([...['ranges','tasks','news'].map(x=>api('/rest/v1/'+x+'?select=*')),api('/rest/v1/events?select=*').catch(()=>[]),api('/rest/v1/comments?select=*&parent_id=is.null&order=pinned.desc,ts.desc&limit='+(CN+1)).catch(()=>api('/rest/v1/comments?select=*&parent_id=is.null&order=ts.desc&limit='+(CN+1)))]);HM=t.length>CN;const tp=t.slice(0,CN),rp=tp.length?await api('/rest/v1/comments?select=*&order=ts.asc&parent_id=in.('+tp.map(x=>x.id).join(',')+')'):[];S.ranges=a;S.tasks=b.filter(x=>!(dys(x.due)<=-3));if(AD&&TOK)b.filter(x=>dys(x.due)<=-3).forEach(x=>api('/rest/v1/tasks?id=eq.'+encodeURIComponent(x.id),{method:'DELETE'}).then(()=>delF(x.url)).catch(()=>{}));S.news=c;S.events=ev;CMT=[...tp,...rp];IPM={};if(AD&&TOK&&CMT.length){try{(await api('/rest/v1/comment_ips?select=comment_id,ip&comment_id=in.('+CMT.map(x=>x.id).join(',')+')')).forEach(x=>IPM[x.comment_id]=x.ip)}catch(e){}}S.l=1;render(first);drawC()}catch(e){S.l=1;render(first);toast('データを読み込めませんでした')}}
-load(1);$('#ft').textContent='🧭 たちこくナビ v2.2.3 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
+load(1);$('#ft').textContent='🧭 たちこくナビ v3.0.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
 if(SB)setInterval(()=>{if($('#md').hidden&&!document.hidden)load()},60000);
 const delF=u=>{const p=(u||'').split('/public/files/')[1];if(p&&SB)api('/storage/v1/object/files/'+p,{method:'DELETE'}).catch(()=>{})};
 async function save(t,o,file){
@@ -267,7 +280,7 @@ function drawCD(){const up=S.events.filter(x=>x.date&&dys(x.end_date||x.date)>=0
 $('#cdn').innerHTML=pk.map(([k,x])=>{if(!x)return`<div class="cdc" style="--h:${hue(k)}"><small>${E(k)}まで</small><div class="n" style="font-size:20px;line-height:2">未登録</div><p>日程が登録されると表示されます</p></div>`;const d=dys(x.date),run=d<=0;return`<div class="cdc${!run&&d<=7?' soon':''}" style="--h:${hue(k)}"><small>${E(k)}${run?'':'まで あと'}</small><div class="n">${run?(d==0?'今日！':'実施中！'):'<span class="cn" data-n="'+d+'">0</span><i>日</i>'}</div><p>${E(x.title)}<br>${fd(x.date)}${x.end_date&&x.end_date!=x.date?' 〜':''}</p></div>`}).join('');document.querySelectorAll('.cn').forEach(e=>cnt(e,+e.dataset.n))}
 function cnt(el,n){const f=+el.textContent||0,s=performance.now();(function u(t){const k=Math.min(1,(t-s)/700);el.textContent=Math.round(f+(n-f)*k);if(k<1)requestAnimationFrame(u)})(s)}
 function card(x,i,a){const R=tab=='ranges',N=tab=='news',V=tab=='events',h=hue(V?x.kind:N?x.cat:R?x.exam:x.subject),pre=`<article class="card${a?'':' in sx'}" style="--h:${h};--i:${i}" data-id="${x.id}">`;
-const fl=`<div class="ac">${x.url?`<button data-dl="${x.id}">⬇ ダウンロード</button><a href="${x.url}" target="_blank" rel="noopener">👁 開く</a>`:''}</div><div class="adm"><button data-ed="${x.id}">✏️ 編集</button><button data-del="${x.id}">🗑 削除</button></div>`;
+const fl=`<div class="ac">${x.url?`<button data-dl="${x.id}">⬇ ダウンロード</button><a href="${E(x.url)}" target="_blank" rel="noopener">👁 開く</a>`:''}</div><div class="adm"><button data-ed="${x.id}">✏️ 編集</button><button data-del="${x.id}">🗑 削除</button></div>`;
 if(V){const d=dys(x.date),de=dys(x.end_date||x.date),lb=d>0?`あと${d}日`:de>=0?(d==0&&de==0?'今日！':'実施中！'):'終了';return pre.replace('class="card','class="card'+(de<0?' over':d>=0&&d<=7?' hot':''))+`<span class="badge">${E(x.kind)}</span><h3>${E(x.title)}</h3><div class="cd">⏳ ${lb}</div><p>📅 ${fd(x.date)}${x.end_date&&x.end_date!=x.date?' 〜 '+fd(x.end_date):''}</p>${x.note?`<p>${E(x.note)}</p>`:''}`+fl+'</article>'}
 if(N)return pre+`<span class="badge">${x.pin?'📌 ':''}${E(x.cat)}</span><h3>${E(x.title)}</h3><p style="white-space:pre-wrap">${E(x.detail)}</p><small>🗓 ${fd(x.date)}</small>`+fl+'</article>';
 if(R)return pre+`<span class="badge">${E(x.exam)}</span><h3>${E(x.title)}</h3>${x.date?`<p>🗓 試験日：${fd(x.date)}</p>`:''}${x.note?`<p>${E(x.note)}</p>`:''}<small>更新：${fd(x.updated||0)}</small>${fl}</article>`;
@@ -307,18 +320,24 @@ const md=h=>{$('#bx').innerHTML=h;$('#md').hidden=false;$('#bx').classList.remov
 $('#md').onclick=e=>{if(e.target.id=='md'||e.target.dataset.x!=null)cl()};
 let LOCKM=false;
 const LKD=()=>{try{return LOCKM||localStorage.getItem('tn_lockdev')=='1'}catch(e){return LOCKM}};
-const LKF=()=>{try{return JSON.parse(localStorage.getItem('tn_fail'))||{n:0}}catch(e){return{n:0}}};
-function pw(){if(LKD())return toast('🔒 この端末からのログインは停止されています');
-if(!SB){toast('デモモード（Supabase未設定）では管理者機能は使えません');return}
+const LKF=()=>{try{const f=JSON.parse(localStorage.getItem('tn_fail'));return(f&&Number.isFinite(f.n)&&f.n>=0&&f.n<=999)?f:{n:0}}catch(e){return{n:0}}};
+function rfm(){md(`<h2>🔑 ロック解除（秘密の質問）</h2><p style="color:var(--mut)">本人確認のため、3つすべてに答えてください。1日に試せる回数には上限があります。</p><label>① 出身幼稚園は？<input id="r1" autocomplete="off"></label><label>② 父方の祖母は何県出身？<input id="r2" autocomplete="off"></label><label>③ MBTIは？<input id="r3" autocomplete="off"></label><div class="row"><button class="btn" id="rok">解除する</button><button class="btn g" data-x>キャンセル</button></div>`);
+$('#rok').onclick=async()=>{const a1=$('#r1').value,a2=$('#r2').value,a3=$('#r3').value;if(!a1||!a2||!a3)return toast('3つとも入力してください');
+let ok=false;try{ok=(await api('/rest/v1/rpc/recover_access',{method:'POST',headers:JH,body:JSON.stringify({a1:nrm(a1),a2:nrm(a2),a3:nrm(a3).toUpperCase()})}))===true}catch(e){if(/rate limit/i.test(e.message||'')){cl();toast('⏳ 試行が多すぎます。しばらくしてからお試しください');return}}
+if(ok){LOCKM=false;try{localStorage.removeItem('tn_lockdev');localStorage.removeItem('tn_fail')}catch(e){}cl();toast('🔓 ロックを解除しました。もう一度ログインしてください');setTimeout(pw,400)}else{const b=$('#bx');void b.offsetWidth;b.classList.add('shake');toast('残念、不正解です')}}}
+function pw(){if(!SB){toast('デモモード（Supabase未設定）では管理者機能は使えません');return}
+if(LKD()){md('<h2>🔒 この端末はロック中です</h2><p style="color:var(--mut)">パスワードを3回間違えたため、ログインを停止しています。</p><div class="row"><button class="btn" id="rf">🔑 ロックを解除する</button><button class="btn g" data-x>閉じる</button></div>');$('#rf').onclick=rfm;return}
 let st=0;const A=[];
-const bad=()=>{const f=LKF();f.n=(f.n||0)+1;try{localStorage.setItem('tn_fail',JSON.stringify(f))}catch(e){}TOK=null;if(f.n>=3){LOCKM=true;try{localStorage.setItem('tn_lockdev','1')}catch(e){}cl();toast('🔒 3回間違えたため、この端末からのログインを停止しました');return}const b=$('#bx');void b.offsetWidth;b.classList.add('shake');toast('間違っています（あと'+(3-f.n)+'回でこの端末はロックされます）');st=0;A.length=0;setTimeout(draw,450)};
-const draw=()=>{const q=st==3;md(`<h2>${q?'🔐 秘密の質問':'🔐 管理者ログイン（'+(st+1)+'/3）'}</h2><p style="color:var(--mut)">${q?'生まれた病院の名前は？':(st+1)+'段階目のパスワードを入力してください'+(st<2?'<br><small>※ 正しいかどうかは、3つ入力したあとにまとめて確認します</small>':'')}</p><div style="display:flex;gap:6px">${[0,1,2,3].map(i=>`<i style="flex:1;height:6px;border-radius:9px;background:${i<st?'var(--a)':'var(--bd)'}"></i>`).join('')}</div><input id="pi" class="pwi" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${q?'答え':'パスワード'}"><div class="row"><button class="btn" id="ok">${q?'入る':'次へ →'}</button><button class="btn g" data-x>キャンセル</button></div>`);$('#pi').focus();setTimeout(()=>$('#pi').focus(),80);$('#ok').onclick=nx;$('#pi').onkeydown=e=>{e.stopPropagation();if(e.key=='Enter')nx()}};
+const bad=()=>{const f=LKF();f.n=(f.n||0)+1;try{localStorage.setItem('tn_fail',JSON.stringify(f))}catch(e){}TOK=null;if(f.n>=3){LOCKM=true;try{localStorage.setItem('tn_lockdev','1')}catch(e){}pw();return}const b=$('#bx');void b.offsetWidth;b.classList.add('shake');toast('間違っています（あと'+(3-f.n)+'回でこの端末はロックされます）');st=0;A.length=0;setTimeout(draw,450)};
+const draw=()=>{const q=st==3;md(`<h2>${q?'🔐 秘密の質問':'🔐 管理者ログイン（'+(st+1)+'/3）'}</h2><p style="color:var(--mut)">${q?'生まれた病院の名前は？':(st+1)+'段階目のパスワードを入力してください'+(st<2?'<br><small>※ 正しいかどうかは、3つ入力したあとにまとめて確認します</small>':'')}</p><div style="display:flex;gap:6px">${[0,1,2,3].map(i=>`<i style="flex:1;height:6px;border-radius:9px;background:${i<st?'var(--a)':'var(--bd)'}"></i>`).join('')}</div><input id="pi" class="pwi" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${q?'答え':'パスワード'}"><div class="row"><button class="btn" id="ok">${q?'入る':'次へ →'}</button><button class="btn g" data-x>キャンセル</button></div>${!q?'<p style="text-align:center"><button class="lk" id="fp" type="button">パスワードを忘れた場合</button></p>':''}`);$('#pi').focus();setTimeout(()=>$('#pi').focus(),80);$('#ok').onclick=nx;$('#pi').onkeydown=e=>{e.stopPropagation();if(e.key=='Enter')nx()};if($('#fp'))$('#fp').onclick=rfm};
 const sq=async v=>{let ok=false;try{ok=(await api('/rest/v1/rpc/unlock_admin',{method:'POST',headers:JH,body:JSON.stringify({ans:nrm(v)})}))===true}catch(e){if(/rate limit/i.test(e.message||'')){TOK=null;cl();toast('⏳ 試行が多すぎます。しばらくしてからお試しください');return}}
 if(ok){try{sessionStorage.setItem('tn_tok',TOK)}catch(e){}try{localStorage.removeItem('tn_fail')}catch(e){}AD=true;document.body.classList.add('adm-on');$('#lock').textContent='🔓 管理中';cl();toast('🔓 管理者モードON');load()}else bad()};
 const nx=async()=>{const v=$('#pi').value;if(!v)return;if(st==3)return sq(v);A.push(v);if(st<2){st++;draw();return}
+try{await api('/rest/v1/rpc/pw_attempt_guard',{method:'POST',headers:JH,body:'{}'})}catch(e){if(/rate limit/i.test(e.message||'')){cl();toast('⏳ 試行が多すぎます。15分ほど待ってからお試しください');return}}
 let ok=false;try{const r=await fetch(SB_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:SB_KEY,...JH},body:JSON.stringify({email:ADMIN_EMAIL,password:A.join('')})}),j=await r.json();if(r.ok&&j.access_token){TOK=j.access_token;ok=true}}catch(e){}
 if(ok){st=3;draw()}else bad()};
 draw()}
+
 const lo=()=>{IPM={};if(SB&&TOK)api('/rest/v1/rpc/lock_admin',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});AD=false;TOK=null;try{sessionStorage.removeItem('tn_tok')}catch(e){}document.body.classList.remove('adm-on');$('#lock').textContent='🔒 管理';toast('ログアウトしました');drawC()};
 try{if(TOK&&JSON.parse(atob(TOK.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).exp*1000>Date.now()){AD=true;document.body.classList.add('adm-on');$('#lock').textContent='🔓 管理中'}else TOK=null}catch(e){TOK=null}
 $('#lock').onclick=()=>AD?lo():pw();$('#out').onclick=lo;
