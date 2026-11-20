@@ -222,6 +222,7 @@ main{padding:10px 12px 90px}
 </main>
 <footer><p id="ft"></p><p>このサイトは検索しても出てきません。不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p>
 <details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-20　v3.1.1</li>
 <li>2026-11-20　v3.1.0</li>
 <li>2026-11-20　v3.0.0</li>
 <li>2026-11-19　v2.2.3</li>
@@ -236,7 +237,7 @@ main{padding:10px 12px 90px}
 <div id="fab"><span>🔓 管理者</span><button class="btn" data-add="ranges">＋範囲表</button><button class="btn" data-add="tasks">＋課題</button><button class="btn" data-add="news">＋お知らせ</button><button class="btn" data-add="events">＋日程</button><button class="btn g" id="out">ログアウト</button></div>
 <div class="md" id="md" hidden><div class="box" id="bx"></div></div>
 <div id="toast"></div>
-<button id="totop" title="一番上に戻る" hidden>⬆</button>
+<button id="totop" title="一番上に戻る">⬆</button>
 <script>
 /* ★★★ Supabase の設定（チャットの手順で取得した値を貼る）★★★ */
 const SB_URL='https://lmsltsroicnapujzesio.supabase.co';              // 例: https://xxxxxxxx.supabase.co
@@ -275,7 +276,7 @@ async function load(first){
  if(!SB){S.ranges=LS('tn_ranges');S.tasks=LS('tn_tasks').filter(x=>!(dys(x.due)<=-3));SV('tn_tasks',S.tasks);S.news=LS('tn_news');S.events=LS('tn_events');CMT=LS('tn_comments');S.l=1;render(first);drawC();return}
  if(first)api('/rest/v1/rpc/purge_old_tasks',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});
  try{const [a,b,c,ev,t]=await Promise.all([...['ranges','tasks','news'].map(x=>api('/rest/v1/'+x+'?select=*')),api('/rest/v1/events?select=*').catch(()=>[]),api('/rest/v1/comments?select=*&parent_id=is.null&order=pinned.desc,ts.desc&limit='+(CN+1)).catch(()=>api('/rest/v1/comments?select=*&parent_id=is.null&order=ts.desc&limit='+(CN+1)))]);HM=t.length>CN;const tp=t.slice(0,CN),rp=tp.length?await api('/rest/v1/comments?select=*&order=ts.asc&parent_id=in.('+tp.map(x=>x.id).join(',')+')'):[];S.ranges=a;S.tasks=b.filter(x=>!(dys(x.due)<=-3));if(AD&&TOK)b.filter(x=>dys(x.due)<=-3).forEach(x=>api('/rest/v1/tasks?id=eq.'+encodeURIComponent(x.id),{method:'DELETE'}).then(()=>delF(x.url)).catch(()=>{}));S.news=c;S.events=ev;CMT=[...tp,...rp];IPM={};if(AD&&TOK&&CMT.length){try{(await api('/rest/v1/comment_ips?select=comment_id,ip&comment_id=in.('+CMT.map(x=>x.id).join(',')+')')).forEach(x=>IPM[x.comment_id]=x.ip)}catch(e){}}S.l=1;render(first);drawC()}catch(e){S.l=1;render(first);toast('データを読み込めませんでした')}}
-load(1);$('#ft').textContent='🧭 たちこくナビ v3.1.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
+load(1);$('#ft').textContent='🧭 たちこくナビ v3.1.1 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
 if(SB)setInterval(()=>{if($('#md').hidden&&!document.hidden)load()},60000);
 const delF=u=>{const p=(u||'').split('/public/files/')[1];if(p&&SB)api('/storage/v1/object/files/'+p,{method:'DELETE'}).catch(()=>{})};
 async function save(t,o,file){
