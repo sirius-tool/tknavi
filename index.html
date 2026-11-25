@@ -392,5 +392,6 @@ const tt_=$('#totop');addEventListener('scroll',()=>tt_.classList.toggle('show',
 function route(){const a=location.hash=='#about';$('#home').hidden=a;$('#ab').hidden=!a;$('#abt').textContent=a?'← ホームへ':'ℹ️ 当サイトについて';scrollTo(0,0);if(!a)setTimeout(ind,30)}
 addEventListener('hashchange',route);$('#abt').onclick=()=>{location.hash=location.hash=='#about'?'home':'about'};route();
 </script>
+<script src="https://ai-sensei.studix-app.workers.dev/embed.js" async></script>
 </body>
 </html>
