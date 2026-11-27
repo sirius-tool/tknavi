@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>たちこくナビ</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23060a1e'/%3E%3Ccircle cx='50' cy='50' r='34' fill='none' stroke='%235ee7ff' stroke-width='6'/%3E%3Cpath d='M50 16L63 50H37Z' fill='%23ff6bd6'/%3E%3Cpath d='M50 84L63 50H37Z' fill='%235ee7ff'/%3E%3Ccircle cx='50' cy='50' r='5' fill='%23ffffff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#eef2ff;--fg:#151a40;--mut:#5a6392;--card:rgba(255,255,255,.72);--bd:rgba(21,26,64,.15);--a:#0b8fb8;--b:#d42f9c;--c:#b57d00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060a1e;--fg:#e9edff;--mut:#9aa5d4;--card:rgba(255,255,255,.07);--bd:rgba(255,255,255,.15);--a:#5ee7ff;--b:#ff6bd6;--c:#ffd36b}}
+:root[data-theme="dark"]{--bg:#060a1e;--fg:#e9edff;--mut:#9aa5d4;--card:rgba(255,255,255,.07);--bd:rgba(255,255,255,.15);--a:#5ee7ff;--b:#ff6bd6;--c:#ffd36b}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:500 15px/1.6 "Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",Meiryo,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+#bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.au{position:fixed;inset:-20%;z-index:-2;background:radial-gradient(35% 35% at 20% 25%,color-mix(in srgb,var(--a) 30%,transparent),transparent),radial-gradient(35% 35% at 80% 70%,color-mix(in srgb,var(--b) 26%,transparent),transparent);animation:au 20s ease-in-out infinite alternate}
+@keyframes au{to{transform:rotate(25deg) scale(1.2)}}
+.rb main,.rb .au,.rb #bg{animation:hr 3s linear infinite}
+@keyframes hr{to{filter:hue-rotate(360deg)}}
+#splash{position:fixed;inset:0;z-index:99;background:var(--bg);display:grid;place-content:center;justify-items:center;gap:12px;transition:transform .9s cubic-bezier(.7,0,.2,1),opacity .9s}
+#splash.out{transform:translateY(-100%);opacity:0}
+#splash svg{width:110px;animation:sp 2.4s ease-in-out infinite}
+@keyframes sp{50%{transform:rotate(200deg) scale(1.15)}}
+#splash b{font-size:30px;letter-spacing:.2em;color:var(--a)}
+svg .nb{fill:var(--b)}svg .na{fill:var(--a)}svg{color:var(--fg)}
+.nd{transform-origin:50px 50px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;justify-content:space-between;align-items:center;padding:10px clamp(14px,4vw,40px);backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 60%,transparent);border-bottom:1px solid var(--bd)}
+.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;cursor:pointer;user-select:none}
+.logo svg{width:38px}.logo em{font-style:normal;color:var(--a)}
+button{font:inherit;color:inherit;cursor:pointer}
+.hb{display:flex;gap:8px}
+.hb button,.tabs button,.chip{background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:6px 14px;transition:.2s}
+.hb button:hover,.chip:hover{transform:translateY(-2px);border-color:var(--a)}
+main{max-width:1100px;margin:0 auto;padding:24px clamp(14px,4vw,30px) 80px}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:30px 0 16px}
+@media(max-width:720px){.hero{grid-template-columns:1fr}}
+h1{font-size:clamp(34px,7vw,66px);line-height:1.1;font-weight:900;background:linear-gradient(100deg,var(--a),var(--b),var(--c),var(--a));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-300% 0}}
+.tw{min-height:2em;font-size:18px;color:var(--mut);margin-top:8px}
+.tw::after{content:"▍";color:var(--a);animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.stats{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.st{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:12px 18px;text-align:center;min-width:92px}
+.st b{display:block;font-size:30px;line-height:1.2;color:var(--a)}.st small{color:var(--mut)}
+.ring{position:relative;width:82px;height:82px}.ring svg{width:82px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:7;stroke-linecap:round}
+.ring .t{stroke:var(--bd)}.ring .v{stroke:var(--b);stroke-dasharray:163.4;transition:stroke-dashoffset 1.2s}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-weight:900}
+.tkw{overflow:hidden;border-block:1px dashed var(--bd);margin:12px 0 24px;mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tk{display:flex;width:max-content;gap:50px;padding:7px 0;animation:mq 34s linear infinite;color:var(--mut)}
+.tkw:hover .tk{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.tabs{position:relative;display:flex;width:100%;max-width:620px;gap:4px;padding:5px;background:var(--card);border:1px solid var(--bd);border-radius:99px}
+.tabs button{border:0;background:none;position:relative;z-index:1;font-weight:700;flex:1;white-space:nowrap;padding:8px 6px}
+.tabs button.on{color:#fff}
+#ind{position:absolute;top:5px;bottom:5px;border-radius:99px;background:linear-gradient(90deg,var(--a),var(--b));transition:.4s cubic-bezier(.3,1.4,.5,1);box-shadow:0 4px 18px color-mix(in srgb,var(--b) 40%,transparent)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0}
+#q{flex:1 1 220px;background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:9px 18px;color:var(--fg);font:inherit;outline:0}
+#q:focus,input:focus,select:focus,textarea:focus{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 25%,transparent)}
+.chip.on{background:var(--a);color:#001;border-color:var(--a)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(285px,100%),1fr));gap:18px;perspective:1100px}
+.card{position:relative;overflow:hidden;padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--bd);border-top:4px solid hsl(var(--h) 85% 58%);backdrop-filter:blur(14px);opacity:0;transform:rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .15s,translate .25s,scale .25s,box-shadow .3s;display:flex;flex-direction:column;gap:6px}
+.card.in{opacity:1;animation:rv .6s calc(var(--i)*60ms) backwards}.card.sx{animation:none}
+@keyframes rv{from{opacity:0;translate:0 34px}}
+.card:hover{translate:0 -10px;scale:1.03;z-index:3;box-shadow:0 22px 50px color-mix(in srgb,hsl(var(--h) 85% 58%) 40%,transparent)}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:.3s;background:radial-gradient(240px at var(--mx,50%) var(--my,0),color-mix(in srgb,hsl(var(--h) 90% 62%) 30%,transparent),transparent)}
+.card:hover::after{opacity:1}
+.badge{align-self:flex-start;background:hsl(var(--h) 85% 58%);color:#000;font-weight:900;border-radius:99px;padding:2px 12px;font-size:13px}
+.card h3{font-size:19px;line-height:1.35}
+.card p{color:var(--mut);font-size:14px}.card small{color:var(--mut);opacity:.8}
+.ac,.adm{display:flex;gap:8px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+.adm{display:none}.adm button{font-size:13px}
+.adm-on .adm{display:flex}
+.btn,.ac a,.ac button,.adm button{background:linear-gradient(90deg,var(--a),var(--b));color:#fff;border:0;border-radius:12px;padding:8px 14px;font-weight:700;text-decoration:none;transition:.2s;font-size:14px}
+.btn:hover,.ac a:hover,.ac button:hover,.adm button:hover{transform:translateY(-2px) scale(1.04)}
+.ac a,.btn.g,.adm button+button{background:var(--card);color:var(--fg);border:1px solid var(--bd)}
+.bar{height:6px;border-radius:9px;background:var(--bd);overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--a),var(--b));animation:gw 1.3s both}
+@keyframes gw{from{width:0}}
+.cd{font-weight:900;font-size:22px}
+.over{filter:grayscale(.6)}.over .cd{color:var(--mut)}
+.hot .cd{color:var(--b)}.card.in.hot{animation:rv .6s calc(var(--i)*60ms) backwards,pl 1.6s infinite}.card.sx.hot{animation:pl 1.6s infinite}
+@keyframes pl{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--b) 25%,transparent)}}
+.dn h3{text-decoration:line-through;opacity:.6}
+.ck{display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:700}
+.ck input{accent-color:var(--a);width:18px;height:18px}
+.empty{grid-column:1/-1;text-align:center;padding:60px 10px;color:var(--mut);font-size:18px}
+footer{text-align:center;color:var(--mut);padding:30px 14px calc(30px + env(safe-area-inset-bottom,0px));font-size:13px}
+#fab{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));translate:-50% 150%;z-index:35;display:flex;gap:8px;padding:10px;border-radius:99px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--bd);transition:translate .5s cubic-bezier(.3,1.5,.5,1);align-items:center}
+.adm-on #fab{translate:-50% 0}
+#fab span{padding:0 8px;font-weight:900;color:var(--b)}
+.md{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:14px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+.md[hidden]{display:none}
+.box{width:min(470px,100%);max-height:92vh;overflow:auto;background:var(--bg);border:1px solid var(--bd);border-radius:24px;padding:24px;display:grid;gap:12px;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}
+@keyframes pop{from{scale:.6;opacity:0}}
+.shake{animation:sk .4s}
+@keyframes sk{20%,60%{translate:-10px}40%,80%{translate:10px}}
+.box label{display:grid;gap:3px;font-weight:700;font-size:13px}
+.box input,.box select,.box textarea{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:12px;padding:9px 12px;font:inherit;outline:0}
+.box textarea{min-height:70px}.row{display:flex;gap:8px}
+#toast{position:fixed;top:calc(70px + env(safe-area-inset-top,0px));left:50%;translate:-50% -30px;opacity:0;z-index:80;background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:99px;font-weight:700;transition:.4s;pointer-events:none;max-width:90vw;text-align:center}
+#toast.on{translate:-50% 0;opacity:1}
+.st{transition:.25s}.st:hover{translate:0 -8px;scale:1.06;box-shadow:0 12px 28px color-mix(in srgb,var(--a) 30%,transparent)}
+.badge{transition:.25s}.card:hover .badge{scale:1.12;rotate:-3deg}
+.card h3{transition:.25s}.card:hover h3{color:hsl(var(--h) 85% 60%);translate:3px 0}
+.logo{transition:.3s}.logo:hover{scale:1.06;filter:drop-shadow(0 6px 10px color-mix(in srgb,var(--a) 50%,transparent))}
+.tk span{display:inline-block;transition:.2s}.tk span:hover{color:var(--fg);scale:1.1}
+.hb button:hover,.chip:hover{box-shadow:0 8px 20px color-mix(in srgb,var(--a) 28%,transparent)}
+.nbn .chip{display:inline-flex;gap:8px;align-items:center;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;border-color:var(--b);animation:bn 2.4s infinite}
+@keyframes bn{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--b) 22%,transparent)}}
+.pwi{-webkit-text-security:disc;text-security:disc}
+.box input,.box select,.box textarea{font-size:16px}
+footer p{margin:4px 0}
+.osn{font-size:11px;color:var(--mut);margin:0 0 6px;line-height:1.5}.osn a{color:var(--a)}
+.sbnrow{display:flex;flex-wrap:wrap;gap:8px}
+#totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:35;width:44px;height:44px;border-radius:99px;border:1px solid var(--bd);background:var(--card);backdrop-filter:blur(14px);color:var(--fg);font-size:18px;box-shadow:0 8px 20px rgba(0,0,0,.18);transition:.25s;opacity:0;translate:0 10px;pointer-events:none}
+#totop.show{opacity:1;translate:0 0;pointer-events:auto}
+#totop:hover{translate:0 -4px;scale:1.08}
+.adm-on #totop{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+.vh{margin-top:10px;font-size:12px;color:var(--mut)}
+.vh summary{cursor:pointer;user-select:none}
+.vh ul{list-style:none;padding:0;margin:6px 0 0;display:inline-flex;flex-direction:column;gap:2px}
+.tbw{position:sticky;top:calc(var(--hh,60px) + env(safe-area-inset-top,0px));z-index:25;display:flex;justify-content:center;padding:8px 6px 10px;margin:0 -6px;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 72%,transparent)}
+.cdn{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:6px 0 18px}
+.cdc{background:var(--card);border:1px solid var(--bd);border-top:4px solid hsl(var(--h) 85% 58%);border-radius:18px;padding:12px 14px;text-align:center;transition:.25s;min-width:0}
+.cdc:hover{translate:0 -8px;scale:1.04;box-shadow:0 14px 32px color-mix(in srgb,hsl(var(--h) 85% 58%) 35%,transparent)}
+.cdc small{color:var(--mut);font-weight:700}.cdc p{font-size:12px;color:var(--mut);overflow-wrap:anywhere}
+.cdc .n{font-size:clamp(32px,9vw,46px);font-weight:900;line-height:1.15;color:hsl(var(--h) 85% 58%)}.cdc .n i{font-style:normal;font-size:.4em;margin-left:2px;color:var(--fg)}
+.cdc.soon{animation:pl 1.6s infinite}
+.card{min-width:0;overflow-wrap:anywhere}
+.fg{grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr))}
+@media(max-width:560px){
+body{font-size:14px}
+header{flex-wrap:wrap;gap:6px;padding:8px 12px}.logo{font-size:19px}.logo svg{width:32px}
+.hb{gap:6px}.hb button{padding:5px 10px;font-size:12px}
+main{padding:10px 12px 90px}
+.hero{padding:14px 0 6px;gap:12px}.tw{font-size:15px}
+.stats{gap:8px}.st{padding:8px 10px;min-width:0;flex:1}.st b{font-size:22px}.ring{width:64px;height:64px}.ring svg{width:64px}
+.tabs button{font-size:12px;padding:8px 2px}.tabs .x{display:none}
+.sbn{white-space:normal;text-align:center}
+.card{padding:16px}.ci.rp{margin-left:14px}.box{padding:18px}
+#fab{width:calc(100% - 20px);flex-wrap:wrap;justify-content:center;border-radius:22px;gap:6px}#fab span{width:100%;text-align:center}#fab .btn{padding:6px 10px;font-size:13px}
+.adm-on main{padding-bottom:190px}
+}
+.hb{flex-wrap:wrap;justify-content:flex-end}
+.sbw{margin-bottom:14px}.sbn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 14px;border-radius:99px;text-decoration:none;color:var(--fg);background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a)) border-box;background-size:auto,300% 100%;border:2px solid transparent;animation:sh 5s linear infinite;transition:.25s}.sbn:hover{translate:0 -4px;scale:1.05;box-shadow:0 10px 24px color-mix(in srgb,var(--b) 35%,transparent)}
+#cm{margin-top:60px}#cm h2{font-size:24px;margin-bottom:10px}
+.cmf{display:grid;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:16px}
+.cmf input,.cmf textarea{background:transparent;color:var(--fg);border:1px solid var(--bd);border-radius:12px;padding:9px 12px;font:inherit;font-size:16px;outline:0;min-height:44px}.cmf textarea{min-height:76px;resize:vertical}.cmf .btn{justify-self:end}
+.ci{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px 16px;margin-top:10px;transition:.25s}.ci:hover{translate:5px -3px;box-shadow:0 10px 26px color-mix(in srgb,var(--a) 25%,transparent)}.ci p{margin:4px 0;word-break:break-word}.ci small{color:var(--mut)}
+.cx{display:none;background:none;border:1px solid var(--bd);border-radius:10px;padding:2px 10px;font-size:12px;color:var(--mut)}.adm-on .cx,.cx.own{display:inline-block}.cx:hover{border-color:var(--b);color:var(--b)}
+[hidden]{display:none!important}
+.ci.pin{border-color:var(--b);box-shadow:0 0 0 2px color-mix(in srgb,var(--b) 20%,transparent)}.ipt{color:var(--mut);font-size:11px}
+.ci.rp{margin-left:28px;border-left:3px solid var(--a)}.vf{color:var(--a);font-weight:700;font-size:12px;border:1px solid var(--a);border-radius:99px;padding:0 8px;margin-left:6px}
+.rpb{display:flex;justify-content:space-between;align-items:center;gap:8px;background:color-mix(in srgb,var(--a) 14%,transparent);border-radius:12px;padding:6px 12px;font-size:13px}
+.lk{background:none;border:1px solid var(--bd);border-radius:99px;padding:2px 12px;font-size:13px;transition:.2s}#fp.lk{border:0;text-decoration:underline;color:var(--mut)}.lk:hover{translate:0 -3px;scale:1.1;border-color:var(--a)}.lk.on{background:var(--a);color:#001;border-color:var(--a)}.lk:active{scale:.9}
+.pg h2{margin:30px 0 8px;font-size:22px;border-left:5px solid var(--a);padding-left:12px}.pg p,.pg li{color:var(--mut);margin:6px 0}.pg ul{padding-left:22px}.pg .lead{font-size:17px;color:var(--fg)}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:14px}.fc{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;transition:.25s}.fc:hover{translate:0 -8px;scale:1.03;box-shadow:0 16px 36px color-mix(in srgb,var(--b) 30%,transparent)}.fc b{font-size:17px}
+</style>
+</head>
+<body>
+<!-- admax -->
+<script src="https://adm.shinobi.jp/s/07074144279ef4dc8eccf810c9cf9d9e"></script>
+<!-- admax -->
+<div class="au"></div><canvas id="bg"></canvas>
+<div id="splash"><div id="sc"></div><b>たちこくナビ</b><small id="sp">0%</small></div>
+<header>
+  <div class="logo" id="logo"><span class="lg"></span><span>たちこく<em>ナビ</em></span></div>
+  <div class="hb"><button id="cmj" title="コメント欄へ移動">💬 コメント欄へ</button><button id="th" title="テーマ切替">🌓</button><button id="abt">ℹ️ 当サイトについて</button><button id="lock">🔒 管理</button></div>
+</header>
+<main id="home">
+  <div class="tbw"><nav class="tabs" id="tabs"><i id="ind"></i><button class="on" data-t="ranges">📄 範囲表</button><button data-t="tasks">📝 課題</button><button data-t="news">📢 お知らせ<span class="x">・ニュース</span></button><button data-t="events">📅 日程</button></nav></div>
+  <section class="hero">
+    <div><h1>たちこくナビ</h1><p class="tw" id="tw"></p></div>
+    <div class="stats">
+      <div class="ring"><svg viewBox="0 0 60 60"><circle class="t" cx="30" cy="30" r="26"/><circle class="v" id="rv" cx="30" cy="30" r="26" stroke-dashoffset="163.4"/></svg><span id="rp">0%</span></div>
+      <div class="st"><b id="s1">0</b><small>範囲表</small></div>
+      <div class="st"><b id="s2">0</b><small>未完了の課題</small></div>
+      <div class="st"><b id="s3">0</b><small>7日以内の期限</small></div>
+    </div>
+  </section>
+  <section class="cdn" id="cdn"></section>
+  <div id="nb" class="nbn"></div>
+  <div class="tkw"><div class="tk" id="tk"></div></div>
+  <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 考査の練習問題解くならたちこくナビneo! →</a></div></div>
+    <div class="tools"><input id="q" placeholder="🔍 検索（/ キーで移動）"><div id="chips" style="display:contents"></div></div>
+  <div class="grid" id="grid"></div>
+<section id="cm"><h2>💬 みんなのコメント（荒らさないでね）</h2><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
+</main>
+<main id="ab" class="pg" hidden>
+  <h1 style="font-size:clamp(30px,6vw,52px);padding:24px 0 6px">当サイトについて</h1>
+  <p class="lead">「たちこくナビ」は、学校生活でいちばん探しやすい情報――テストの範囲表、提出期限の近い課題、大切なお知らせ――を、ひとつの場所にあつめたナビゲーションサイトです。「あれ、範囲表どこだっけ？」「この課題、いつまでだっけ？」という無駄な探し物の時間をなくして、勉強に向き合う時間を増やすことが目的です。ぜひたくさん使ってください。</p>
+  <h2>できること</h2>
+  <div class="fg">
+    <div class="fc"><b>📄 範囲表</b><p>どの考査（例：2学期期末考査）のものかが一目でわかる形で、範囲表のPDFをダウンロード・閲覧できます。試験日や備考も確認できます。</p></div>
+    <div class="fc"><b>📝 課題</b><p>教科・期限・内容を一覧で確認。「あと何日」がカウントダウンされ、期限が近いものは赤く光って知らせます。終わったら「完了」にチェックすれば、達成率リングが伸びます。</p></div>
+    <div class="fc"><b>📢 お知らせ・ニュース</b><p>行事の変更や重要な連絡を掲載します。ピン留めされたお知らせは先頭に表示され、最新の1件はトップにも顔を出します。</p></div>
+    <div class="fc"><b>💬 コメント</b><p>ページ下部のコメント欄で、感想や要望を気軽に書き込めます。不適切なコメントは管理者が削除します。👍で共感も伝えられます。荒らしコメント対策機能追加しました。不適切な言葉（NGワード）は、伏せ字や記号をはさんでも自動で投稿できなくなります。</p></div>
+    <div class="fc"><b>📅 日程カウントダウン</b><p>考査や模試の日程を登録すると、「考査まであと◯日」「模試まであと◯日」がトップに表示されます。</p></div>
+    <div class="fc"><b>🔍 検索と絞り込み</b><p>キーワード検索と、考査・教科ごとの絞り込みができます。「/」キーを押すとすぐ検索欄に移動できます。</p></div>
+    <div class="fc"><b>🌓 見た目の切替</b><p>ダークモードとライトモードをボタンひとつで切り替えられます。こっそり隠し機能もあるかも？</p></div>
+  </div>
+  <h2>このサイトについて</h2>
+  <p>プリントの紛失、連絡の見落とし、クラスごとに情報がバラバラになること――学校生活でよくある困りごとを、スマホやパソコンからいつでも確認できる形で解決します。</p>
+  <h2>情報の更新について</h2>
+  <p>範囲表・課題・お知らせの登録と更新は、管理者が管理者画面から行います。内容はできるだけ正確に保つよう努めていますが、実際の発表と異なる場合は、学校からの案内や先生の指示を優先してください。</p>
+  <p>「完了」のチェック状況は、あなたの端末のブラウザにだけ保存され、他の人には見えません。</p>
+  <h2>ご利用にあたってのお願い</h2>
+  <ul>
+    <li>コメント欄に、氏名・連絡先・パスワードなどの個人情報を書かないでください。</li>
+    <li>他の人を傷つける言葉や、スパム・宣伝の投稿は禁止です。管理者が削除することがあります。</li>
+    <li>資料のダウンロードは、個人の学習目的でお使いください。無断での再配布はご遠慮ください。</li>
+    <li>このサイトは検索しても出てきません。リンクを知っている人だけが使えるサイトです。</li>
+  <li>不正アクセス対策のため、コメント投稿時のIPアドレスを、管理者だけが見られる形で記録しています。不正アクセスには断固とした対応を取ります。</li>
+  </ul>
+  <h2>お問い合わせ</h2>
+  <p>不具合やご要望は、管理者に直接お伝えください。コメント欄への書き込みでも、意見を受け付けています。</p>
+  <h2>おすすめ：STUDIX・たちこくナビneo</h2>
+  <p>学習管理アプリ「STUDIX」と、考査の練習問題が解ける「たちこくナビneo」も、あわせてどうぞ。</p>
+  <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 STUDIXを開く →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 たちこくナビneoを開く →</a></div></div>
+  <p style="margin-top:26px"><a class="btn" href="#home" style="display:inline-block;text-decoration:none">← ホームへ戻る</a></p>
+</main>
+<footer><p id="ft"></p><p>このサイトは検索しても出てきません。不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p>
+  <!-- admax -->
+<script src="https://adm.shinobi.jp/s/07074144279ef4dc8eccf810c9cf9d9e"></script>
+<!-- admax -->
+<details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-27　v4.2.0</li>
+<li>2026-11-26　v4.1.0</li>
+<li>2026-11-26　v4.0.0</li>
+<li>2026-11-25　v3.1.3</li>
+<li>2026-11-21　v3.1.2</li>
+<li>2026-11-20　v3.1.1</li>
+<li>2026-11-20　v3.1.0</li>
+<li>2026-11-20　v3.0.0</li>
+<li>2026-11-19　v2.2.3</li>
+<li>2026-11-19　v2.2.2</li>
+<li>2026-11-19　v2.2.1</li>
+<li>2026-11-19　v2.2.0</li>
+<li>2026-11-19　v2.1.1</li>
+<li>2026-11-18　v2.1.0</li>
+<li>2026-11-18　v2.0.0</li>
+<li>2026-11-18　v1.0.0</li>
+</ul></details></footer>
+<div id="fab"><span>🔓 管理者</span><button class="btn" data-add="ranges">＋範囲表</button><button class="btn" data-add="tasks">＋課題</button><button class="btn" data-add="news">＋お知らせ</button><button class="btn" data-add="events">＋日程</button><button class="btn g" id="out">ログアウト</button></div>
+<div class="md" id="md" hidden><div class="box" id="bx"></div></div>
+<div id="toast"></div>
+<button id="totop" title="一番上に戻る">⬆</button>
+<script>
+/* ★★★ Supabase の設定（チャットの手順で取得した値を貼る）★★★ */
+const SB_URL='https://lmsltsroicnapujzesio.supabase.co';              // 例: https://xxxxxxxx.supabase.co
+const SB_KEY='sb_publishable_FZ6dmJtR4Ulc7Ozk4qz-_w_ZpSp_b6N';              // anon public キー
+const ADMIN_EMAIL='admin@tachikoku-navi.example'; // 管理者として登録したメール
+const SB=!!(SB_URL&&SB_KEY);
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CP='<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-dasharray="2 6" opacity=".5"/><g class="nd"><path class="nb" d="M50 10L62 50H38Z"/><path class="na" d="M50 90L62 50H38Z"/></g><circle cx="50" cy="50" r="5" fill="currentColor"/></svg>';
+$('#sc').innerHTML=CP;document.querySelector('.lg').innerHTML=CP;
+const EX=['1学期中間考査','1学期期末考査','2学期中間考査','2学期期末考査','3学期期末考査','学年末考査','実力テスト','その他'];
+const SJ=['国語','数学','英語','理科','社会','物理','化学','生物','地理','歴史','公民','情報','音楽','美術','保健体育','家庭','その他'];
+const LS=k=>{try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}},SV=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return 1}catch(e){return 0}};
+const hue=s=>[...String(s)].reduce((a,c)=>a+c.charCodeAt(0)*47,0)%360;
+let CMT=[],IPM={},lastP=0,CN=20,HM=false,RT=null,LKL=new Set(LS('tn_likes'));let S={ranges:[],tasks:[],news:[],events:[]},tab='ranges',flt='',AD=false,DN=new Set(LS('tn_done'));
+const T0=()=>{const d=new Date();d.setHours(0,0,0,0);return d},dys=s=>Math.round((new Date(s+'T00:00')-T0())/864e5);
+const fd=s=>typeof s=='number'?new Date(s).toLocaleDateString('ja-JP'):new Date(s+'T00:00').toLocaleDateString('ja-JP',{month:'long',day:'numeric',weekday:'short'});
+let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
+/* ---- background: static stars (drawn once) + compass needle ---- */
+const cv=$('#bg'),cx=cv.getContext('2d'),P=Array.from({length:140},()=>({x:Math.random(),y:Math.random(),z:Math.random()*.9+.1,r:Math.random()*1.6+.6}));let W,H,col='#5ee7ff';
+function draw(){W=cv.width=innerWidth;H=cv.height=innerHeight;const n=Math.min(140,W*H/11000|0),S_=P.slice(0,n).map(p=>({...p,x:p.x*W,y:p.y*H}));cx.clearRect(0,0,W,H);cx.fillStyle=cx.strokeStyle=col;for(const p of S_){cx.globalAlpha=.45+.5*p.z;cx.beginPath();cx.arc(p.x,p.y,p.r*(.6+p.z),0,6.3);cx.fill();for(const q of S_){const l=Math.hypot(p.x-q.x,p.y-q.y);if(l<105){cx.globalAlpha=(1-l/105)*.3;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}}}
+const upd=()=>{col=getComputedStyle(document.documentElement).getPropertyValue('--a').trim()||col;draw()};
+upd();addEventListener('resize',()=>{draw();ind()});matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>setTimeout(upd,60));
+addEventListener('pointermove',e=>{const dx=e.clientX-innerWidth/2,dy=e.clientY-innerHeight/2;document.querySelectorAll('.nd').forEach(n=>n.style.transform='rotate('+(Math.atan2(dy,dx)*180/Math.PI+90)+'deg)')},{passive:true});
+/* ---- splash / typewriter ---- */
+let pc=0;const si=setInterval(()=>{pc+=Math.random()*9+3;if(pc>=100){pc=100;clearInterval(si);setTimeout(()=>{$('#splash').classList.add('out');setTimeout(()=>$('#splash').remove(),1000)},250)}$('#sp').textContent=(pc|0)+'%'},90);
+const PH=['範囲表をダウンロード','課題の期限をチェック','テスト勉強、ここから出発','提出忘れ、ゼロへ。'];let pi=0,ci=0,dl_=0;
+(function ty(){const s=PH[pi];ci+=dl_?-1:1;$('#tw').textContent=s.slice(0,ci);let t=dl_?30:85;if(!dl_&&ci==s.length){dl_=1;t=1500}else if(dl_&&!ci){dl_=0;pi=(pi+1)%PH.length;t=300}setTimeout(ty,t)})();
+/* ---- data layer: Supabase (when configured) or this device only ---- */
+let TOK=null;try{TOK=sessionStorage.getItem('tn_tok')}catch(e){}
+const JH={'Content-Type':'application/json'};
+const RQ=[],T_LOAD=Date.now();
+function thr(){const n=Date.now();while(RQ.length&&n-RQ[0]>6e4)RQ.shift();if(RQ.length>=80){const e=new Error('rate limit');e.status=429;throw e}RQ.push(n)}
+async function api(path,opt={}){thr();const r=await fetch(SB_URL+path,{...opt,headers:{apikey:SB_KEY,Authorization:'Bearer '+(TOK||SB_KEY),...(opt.headers||{})}});const t=await r.text();if(!r.ok){const e=new Error(t);e.status=r.status;throw e}return t?JSON.parse(t):null}
+function fail(e,m){const t=(e&&e.message)||'';if(/rate limit/i.test(t))toast('⏳ アクセスが集中しています。少し待ってからお試しください');else if(/name reserved/i.test(t))toast('その名前は使えません');else if(/closed/i.test(t))toast('現在この機能は一時停止中です');else if(TOK&&e&&(e.status==401||e.status==403||/JWT|exp/i.test(t))){lo();toast('ログインの有効期限が切れました。もう一度ログインしてください')}else toast(m)}
+async function load(first){
+ if(!SB){S.ranges=LS('tn_ranges');S.tasks=LS('tn_tasks').filter(x=>!(dys(x.due)<=-3));SV('tn_tasks',S.tasks);S.news=LS('tn_news');S.events=LS('tn_events');CMT=LS('tn_comments');S.l=1;render(first);drawC();return}
+ if(first)api('/rest/v1/rpc/purge_old_tasks',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});
+ try{const [a,b,c,ev,t]=await Promise.all([...['ranges','tasks','news'].map(x=>api('/rest/v1/'+x+'?select=*')),api('/rest/v1/events?select=*').catch(()=>[]),api('/rest/v1/comments?select=*&parent_id=is.null&order=pinned.desc,ts.desc&limit='+(CN+1)).catch(()=>api('/rest/v1/comments?select=*&parent_id=is.null&order=ts.desc&limit='+(CN+1)))]);HM=t.length>CN;const tp=t.slice(0,CN),rp=tp.length?await api('/rest/v1/comments?select=*&order=ts.asc&parent_id=in.('+tp.map(x=>x.id).join(',')+')'):[];S.ranges=a;S.tasks=b.filter(x=>!(dys(x.due)<=-3));if(AD&&TOK)b.filter(x=>dys(x.due)<=-3).forEach(x=>api('/rest/v1/tasks?id=eq.'+encodeURIComponent(x.id),{method:'DELETE'}).then(()=>delF(x.url)).catch(()=>{}));S.news=c;S.events=ev;CMT=[...tp,...rp];IPM={};if(AD&&TOK&&CMT.length){try{(await api('/rest/v1/comment_ips?select=comment_id,ip&comment_id=in.('+CMT.map(x=>x.id).join(',')+')')).forEach(x=>IPM[x.comment_id]=x.ip)}catch(e){}}S.l=1;render(first);drawC()}catch(e){S.l=1;render(first);toast('データを読み込めませんでした')}}
+load(1);$('#ft').textContent='🧭 たちこくナビ v4.2.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
+if(SB)setInterval(()=>{if($('#md').hidden&&!document.hidden)load()},60000);
+const delF=u=>{const p=(u||'').split('/public/files/')[1];if(p&&SB)api('/storage/v1/object/files/'+p,{method:'DELETE'}).catch(()=>{})};
+async function save(t,o,file){
+ if(file){if(SB){const p=o.id+'_'+Date.now().toString(36)+'.pdf';await api('/storage/v1/object/files/'+p,{method:'POST',headers:{'Content-Type':file.type||'application/pdf','x-upsert':'true'},body:file});delF(o.url);o.url=SB_URL+'/storage/v1/object/public/files/'+p}else o.url=await new Promise((ok,ng)=>{const f=new FileReader;f.onload=()=>ok(f.result);f.onerror=ng;f.readAsDataURL(file)});o.fn=file.name}
+ if(SB){await api('/rest/v1/'+t,{method:'POST',headers:{...JH,Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(o)});await load()}else{S[t]=S[t].filter(x=>x.id!=o.id).concat(o);if(!SV('tn_'+t,S[t]))throw 0;render()}}
+async function rm(t,o){try{if(SB){await api('/rest/v1/'+t+'?id=eq.'+encodeURIComponent(o.id),{method:'DELETE'});delF(o.url);await load()}else{S[t]=S[t].filter(x=>x.id!=o.id);SV('tn_'+t,S[t]);render()}toast('🗑 削除しました')}catch(e){fail(e,'削除できませんでした')}}
+async function dl(o){try{const b=await (await fetch(o.url)).blob(),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=o.fn||'file.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('⬇ 保存しました')}catch(e){window.open(o.url,'_blank')}}
+/* ---- render ---- */
+function drawCD(){const up=S.events.filter(x=>x.date&&dys(x.end_date||x.date)>=0).sort((a,b)=>a.date<b.date?-1:1),pk=['考査','模試'].map(k=>[k,up.find(x=>x.kind==k)]),ot=up.find(x=>x.kind!='考査'&&x.kind!='模試');if(ot)pk.push([ot.kind,ot]);
+$('#cdn').innerHTML=pk.map(([k,x])=>{if(!x)return`<div class="cdc" style="--h:${hue(k)}"><small>${E(k)}まで</small><div class="n" style="font-size:20px;line-height:2">未登録</div><p>日程が登録されると表示されます</p></div>`;const d=dys(x.date),run=d<=0;return`<div class="cdc${!run&&d<=7?' soon':''}" style="--h:${hue(k)}"><small>${E(k)}${run?'':'まで あと'}</small><div class="n">${run?(d==0?'今日！':'実施中！'):'<span class="cn" data-n="'+d+'">0</span><i>日</i>'}</div><p>${E(x.title)}<br>${fd(x.date)}${x.end_date&&x.end_date!=x.date?' 〜':''}</p></div>`}).join('');document.querySelectorAll('.cn').forEach(e=>cnt(e,+e.dataset.n))}
+function cnt(el,n){const f=+el.textContent||0,s=performance.now();(function u(t){const k=Math.min(1,(t-s)/700);el.textContent=Math.round(f+(n-f)*k);if(k<1)requestAnimationFrame(u)})(s)}
+function card(x,i,a){const R=tab=='ranges',N=tab=='news',V=tab=='events',h=hue(V?x.kind:N?x.cat:R?x.exam:x.subject),pre=`<article class="card${a?'':' in sx'}" style="--h:${h};--i:${i}" data-id="${x.id}">`;
+const fl=`<div class="ac">${x.url?`<button data-dl="${x.id}">⬇ ダウンロード</button><a href="${E(x.url)}" target="_blank" rel="noopener">👁 開く</a>`:''}</div><div class="adm"><button data-ed="${x.id}">✏️ 編集</button><button data-del="${x.id}">🗑 削除</button></div>`;
+if(V){const d=dys(x.date),de=dys(x.end_date||x.date),lb=d>0?`あと${d}日`:de>=0?(d==0&&de==0?'今日！':'実施中！'):'終了';return pre.replace('class="card','class="card'+(de<0?' over':d>=0&&d<=7?' hot':''))+`<span class="badge">${E(x.kind)}</span><h3>${E(x.title)}</h3><div class="cd">⏳ ${lb}</div><p>📅 ${fd(x.date)}${x.end_date&&x.end_date!=x.date?' 〜 '+fd(x.end_date):''}</p>${x.note?`<p>${E(x.note)}</p>`:''}`+fl+'</article>'}
+if(N)return pre+`<span class="badge">${x.pin?'📌 ':''}${E(x.cat)}</span><h3>${E(x.title)}</h3><p style="white-space:pre-wrap">${E(x.detail)}</p><small>🗓 ${fd(x.date)}</small>`+fl+'</article>';
+if(R)return pre+`<span class="badge">${E(x.exam)}</span><h3>${E(x.title)}</h3>${x.date?`<p>🗓 試験日：${fd(x.date)}</p>`:''}${x.note?`<p>${E(x.note)}</p>`:''}<small>更新：${fd(x.updated||0)}</small>${fl}</article>`;
+const d=dys(x.due),dn=DN.has(x.id),lb=d<0?`${-d}日超過`:d==0?'今日まで！':d==1?'明日まで':`あと${d}日`;
+return pre.replace('class="card','class="card'+(dn?' dn':d<0?' over':d<=1?' hot':'')).replace('class="card',`class="card`)+`<span class="badge">${E(x.subject)}</span><h3>${E(x.title)}</h3><div class="cd">⏳ ${lb}</div>${d<0?`<small>🗑 ${3+d}日後に自動削除されます</small>`:''}<div class="bar"><i style="--w:${Math.max(4,Math.min(100,100-d/14*100))}%"></i></div><p>📅 期限：${fd(x.due)}</p>${x.detail?`<p>${E(x.detail)}</p>`:''}<label class="ck"><input type="checkbox" data-ck="${x.id}" ${dn?'checked':''}>完了した</label>${fl}</article>`}
+function render(a){const R=tab=='ranges',k=x=>tab=='events'?x.kind:tab=='news'?x.cat:R?x.exam:x.subject,all=S[tab],q=$('#q').value.trim().toLowerCase();
+if(flt&&!all.some(x=>k(x)==flt))flt='';
+$('#chips').innerHTML=['',...new Set(all.map(k))].map(c=>`<button class="chip${c==flt?' on':''}" data-f="${E(c)}">${c?E(c):'すべて'}</button>`).join('');
+let l=all.filter(x=>(!flt||k(x)==flt)&&[x.title,x.exam,x.subject,x.note,x.detail,x.kind,x.cat].join(' ').toLowerCase().includes(q));
+l.sort(tab=='events'?(x,y)=>{const a=dys(x.end_date||x.date)<0,b=dys(y.end_date||y.date)<0;return a!=b?a-b:a?(y.date>x.date?1:-1):(x.date<y.date?-1:1)}:tab=='news'?(x,y)=>(!!y.pin-!!x.pin)||(y.date>x.date?1:y.date<x.date?-1:0):R?(x,y)=>(y.updated||0)-(x.updated||0):(x,y)=>{const a=dys(x.due)<0,b=dys(y.due)<0;return a!=b?a-b:a?(y.due>x.due?1:-1):(x.due<y.due?-1:1)});
+$('#grid').innerHTML=l.length?l.map((x,i)=>card(x,i,a)).join(''):`<div class="empty">${S.l||!SB?'📭 まだ何もありません':'🛰 読み込み中…'}</div>`;
+if(a){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.card:not(.in)').forEach(c=>io.observe(c));setTimeout(()=>document.querySelectorAll('.card').forEach(c=>c.classList.add('in')),900)}
+const tk=S.tasks.filter(x=>dys(x.due)>=0),pend=S.tasks.filter(x=>!DN.has(x.id)&&dys(x.due)>=0),wk=pend.filter(x=>dys(x.due)<=7),tot=S.tasks.filter(x=>dys(x.due)>=0||DN.has(x.id)),pct=tot.length?tot.filter(x=>DN.has(x.id)).length/tot.length:0;
+const ln=S.news.slice().sort((x,y)=>(!!y.pin-!!x.pin)||(y.date>x.date?1:-1))[0];$('#nb').innerHTML=ln?`<button class="chip">📢 <b>${E(ln.cat)}</b>　${E(ln.title)}</button>`:'';
+drawCD();cnt($('#s1'),S.ranges.length);cnt($('#s2'),pend.length);cnt($('#s3'),wk.length);
+$('#rv').style.strokeDashoffset=163.4*(1-pct);$('#rp').textContent=Math.round(pct*100)+'%';
+const tl=pend.sort((x,y)=>x.due<y.due?-1:1).slice(0,6).map(x=>{const d=dys(x.due);return`📝 ${E(x.subject)}「${E(x.title)}」${d==0?'今日まで！':d==1?'明日まで':'あと'+d+'日'}`});
+const tx=(tl.length?tl:['🎉 いま期限が近い課題はありません','🧭 たちこくナビへようこそ']).join('</span><span>');$('#tk').innerHTML=`<span>${tx}</span>`.repeat(2).replace(/<\/span><span>/g,'</span><span>')}
+/* ---- tabs ---- */
+function ind(){const b=document.querySelector('.tabs .on'),i=$('#ind');i.style.left=b.offsetLeft+'px';i.style.width=b.offsetWidth+'px'}
+$('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b||b.dataset.t==tab)return;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x==b));tab=b.dataset.t;flt='';$('#q').value='';ind();render(1)};
+setTimeout(ind,50);document.fonts&&document.fonts.ready.then(ind);
+$('#q').oninput=()=>render();
+$('#nb').onclick=()=>document.querySelector('[data-t="news"]').click();
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(b){flt=b.dataset.f;render(1)}};
+/* ---- card interactions: 3D tilt, download, edit, delete, done ---- */
+const G=$('#grid');
+G.onmousemove=e=>{const c=e.target.closest('.card');if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.setProperty('--rx',(.5-y)*10+'deg');c.style.setProperty('--ry',(x-.5)*12+'deg');c.style.setProperty('--mx',x*100+'%');c.style.setProperty('--my',y*100+'%')};
+G.onmouseout=e=>{const c=e.target.closest('.card');if(c&&!c.contains(e.relatedTarget)){c.style.removeProperty('--rx');c.style.removeProperty('--ry')}};
+G.onclick=async e=>{const b=e.target.closest('button');if(!b)return;const f=id=>S[tab].find(x=>x.id==id);
+if(b.dataset.dl)dl(f(b.dataset.dl));
+if(b.dataset.ed)form(tab,f(b.dataset.ed));
+if(b.dataset.del){if(!b.dataset.s){b.dataset.s=1;b.textContent='本当に削除？';setTimeout(()=>{b.dataset.s='';b.textContent='🗑 削除'},3000)}else rm(tab,f(b.dataset.del))}};
+G.onchange=e=>{const id=e.target.dataset.ck;if(!id)return;if(e.target.checked){DN.add(id);const r=e.target.getBoundingClientRect();toast('✅ えらい！1つ完了')}else DN.delete(id);SV('tn_done',[...DN]);render()};
+/* ---- modals / admin ---- */
+const md=h=>{$('#bx').innerHTML=h;$('#md').hidden=false;$('#bx').classList.remove('shake')},cl=()=>$('#md').hidden=true;
+$('#md').onclick=e=>{if(e.target.id=='md'||e.target.dataset.x!=null)cl()};
+let LOCKM=false;
+const LKD=()=>{try{return LOCKM||localStorage.getItem('tn_lockdev')=='1'}catch(e){return LOCKM}};
+const LKF=()=>{try{const f=JSON.parse(localStorage.getItem('tn_fail'));return(f&&Number.isFinite(f.n)&&f.n>=0&&f.n<=999)?f:{n:0}}catch(e){return{n:0}}};
+function rfm(){md(`<h2>🔑 ロック解除（秘密の質問）</h2><p style="color:var(--mut)">本人確認のため、3つすべてに答えてください。1日に試せる回数には上限があります。</p><label>① 出身幼稚園は？<input id="r1" autocomplete="off"></label><label>② 父方の祖母は何県出身？<input id="r2" autocomplete="off"></label><label>③ MBTIは？<input id="r3" autocomplete="off"></label><div class="row"><button class="btn" id="rok">解除する</button><button class="btn g" data-x>キャンセル</button></div>`);
+$('#rok').onclick=async()=>{const a1=$('#r1').value,a2=$('#r2').value,a3=$('#r3').value;if(!a1||!a2||!a3)return toast('3つとも入力してください');
+let ok=false;try{ok=(await api('/rest/v1/rpc/recover_access',{method:'POST',headers:JH,body:JSON.stringify({a1:nrm(a1),a2:nrm(a2),a3:nrm(a3).toUpperCase()})}))===true}catch(e){if(/rate limit/i.test(e.message||'')){cl();toast('⏳ 試行が多すぎます。しばらくしてからお試しください');return}}
+if(ok){LOCKM=false;try{localStorage.removeItem('tn_lockdev');localStorage.removeItem('tn_fail')}catch(e){}cl();toast('🔓 ロックを解除しました。もう一度ログインしてください');setTimeout(pw,400)}else{const b=$('#bx');void b.offsetWidth;b.classList.add('shake');toast('残念、不正解です')}}}
+function pw(){if(!SB){toast('デモモード（Supabase未設定）では管理者機能は使えません');return}
+if(LKD()){md('<h2>🔒 この端末はロック中です</h2><p style="color:var(--mut)">パスワードを3回間違えたため、ログインを停止しています。</p><div class="row"><button class="btn" id="rf">🔑 ロックを解除する</button><button class="btn g" data-x>閉じる</button></div>');$('#rf').onclick=rfm;return}
+let st=0;const A=[];
+const bad=()=>{const f=LKF();f.n=(f.n||0)+1;try{localStorage.setItem('tn_fail',JSON.stringify(f))}catch(e){}TOK=null;if(f.n>=3){LOCKM=true;try{localStorage.setItem('tn_lockdev','1')}catch(e){}pw();return}const b=$('#bx');void b.offsetWidth;b.classList.add('shake');toast('間違っています（あと'+(3-f.n)+'回でこの端末はロックされます）');st=0;A.length=0;setTimeout(draw,450)};
+const draw=()=>{const q=st==3;md(`<h2>${q?'🔐 秘密の質問':'🔐 管理者ログイン（'+(st+1)+'/3）'}</h2><p style="color:var(--mut)">${q?'生まれた病院の名前は？':(st+1)+'段階目のパスワードを入力してください'+(st<2?'<br><small>※ 正しいかどうかは、3つ入力したあとにまとめて確認します</small>':'')}</p><div style="display:flex;gap:6px">${[0,1,2,3].map(i=>`<i style="flex:1;height:6px;border-radius:9px;background:${i<st?'var(--a)':'var(--bd)'}"></i>`).join('')}</div><input id="pi" class="pwi" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${q?'答え':'パスワード'}"><div class="row"><button class="btn" id="ok">${q?'入る':'次へ →'}</button><button class="btn g" data-x>キャンセル</button></div>${!q?'<p style="text-align:center"><button class="lk" id="fp" type="button">パスワードを忘れた場合</button></p>':''}`);$('#pi').focus();setTimeout(()=>$('#pi').focus(),80);$('#ok').onclick=nx;$('#pi').onkeydown=e=>{e.stopPropagation();if(e.key=='Enter')nx()};if($('#fp'))$('#fp').onclick=rfm};
+const sq=async v=>{let ok=false;try{ok=(await api('/rest/v1/rpc/unlock_admin',{method:'POST',headers:JH,body:JSON.stringify({ans:nrm(v)})}))===true}catch(e){if(/rate limit/i.test(e.message||'')){TOK=null;cl();toast('⏳ 試行が多すぎます。しばらくしてからお試しください');return}}
+if(ok){try{sessionStorage.setItem('tn_tok',TOK)}catch(e){}try{localStorage.removeItem('tn_fail')}catch(e){}AD=true;document.body.classList.add('adm-on');$('#lock').textContent='🔓 管理中';cl();toast('🔓 管理者モードON');load()}else bad()};
+const nx=async()=>{const v=$('#pi').value;if(!v)return;if(st==3)return sq(v);A.push(v);if(st<2){st++;draw();return}
+try{await api('/rest/v1/rpc/pw_attempt_guard',{method:'POST',headers:JH,body:'{}'})}catch(e){if(/rate limit/i.test(e.message||'')){cl();toast('⏳ 試行が多すぎます。15分ほど待ってからお試しください');return}}
+let ok=false;try{const r=await fetch(SB_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:SB_KEY,...JH},body:JSON.stringify({email:ADMIN_EMAIL,password:A.join('')})}),j=await r.json();if(r.ok&&j.access_token){TOK=j.access_token;ok=true}}catch(e){}
+if(ok){st=3;draw()}else bad()};
+draw()}
+
+const lo=()=>{IPM={};if(SB&&TOK)api('/rest/v1/rpc/lock_admin',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});AD=false;TOK=null;try{sessionStorage.removeItem('tn_tok')}catch(e){}document.body.classList.remove('adm-on');$('#lock').textContent='🔒 管理';toast('ログアウトしました');drawC()};
+try{if(TOK&&JSON.parse(atob(TOK.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).exp*1000>Date.now()){AD=true;document.body.classList.add('adm-on');$('#lock').textContent='🔓 管理中'}else TOK=null}catch(e){TOK=null}
+$('#lock').onclick=()=>AD?lo():pw();$('#out').onclick=lo;
+document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>form(b.dataset.add));
+const op=(a,v)=>a.map(e=>`<option${e==v?' selected':''}>${e}</option>`).join('');
+function form(t,o={}){const R=t=='ranges';
+md(`<h2>${o.id?'✏️ 編集':'＋ 追加'}：${({ranges:'範囲表',tasks:'課題',news:'お知らせ',events:'日程'})[t]}</h2><div id="fm" style="display:grid;gap:10px">`+(t=='events'?`<label>種類<select name="a">${op(['考査','模試','行事','その他'],o.kind)}</select></label><label>名称<input name="b" value="${E(o.title||'')}" placeholder="例：2学期期末考査 / 第3回全統模試"></label><label>開始日<input type="date" name="c" value="${o.date||''}"></label><label>終了日（複数日のときだけ）<input type="date" name="g" value="${o.end_date||''}"></label><label>備考<textarea name="d">${E(o.note||'')}</textarea></label>`:t=='news'?`<label>種類<select name="a">${op(['お知らせ','重要','ニュース','行事','その他'],o.cat)}</select></label><label>タイトル<input name="b" value="${E(o.title||'')}"></label><label>日付<input type="date" name="c" value="${o.date||new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10)}"></label><label>本文<textarea name="d">${E(o.detail||'')}</textarea></label><label class="ck"><input type="checkbox" name="e" ${o.pin?'checked':''}>📌 ピン留め（先頭に表示）</label>`:R?`<label>どの考査？<select name="a">${op(EX,o.exam)}</select></label><label>タイトル<input name="b" required value="${E(o.title||'')}" placeholder="例：1年 範囲表"></label><label>試験日（任意）<input type="date" name="c" value="${o.date||''}"></label><label>備考<textarea name="d">${E(o.note||'')}</textarea></label>`:`<label>教科<select name="a">${op(SJ,o.subject)}</select></label><label>課題名<input name="b" required value="${E(o.title||'')}" placeholder="例：ワーク p.20〜30"></label><label>提出期限<input type="date" name="c" required value="${o.due||''}"></label><label>内容・提出方法<textarea name="d">${E(o.detail||'')}</textarea></label>`)+`<label>PDF${R?'':'（任意）'}<input type="file" name="f" accept="application/pdf"></label>${o.fn?`<small>現在：${E(o.fn)}（選ぶと差し替え）</small>`:''}<div class="row"><button class="btn" id="sv">保存</button><button class="btn g" data-x>キャンセル</button></div></div>`);
+const g=n=>$('#fm [name="'+n+'"]');$('#sv').onclick=async()=>{const f={a:g('a'),b:g('b'),c:g('c'),d:g('d'),e:g('e'),f:g('f'),g:g('g')},fl=f.f&&f.f.files[0];if(!f.b.value.trim())return toast('タイトルを入力してください');if(t!='ranges'&&!f.c.value)return toast('日付を入れてください');
+if(fl&&!/\.pdf$/i.test(fl.name)&&fl.type!='application/pdf')return toast('PDFファイルを選んでください');
+if(R&&!fl&&!o.url)return toast('範囲表のPDFを選んでください');
+const n={...o,id:o.id||'i'+Date.now().toString(36),updated:Date.now()};
+if(t=='events'){n.kind=f.a.value;n.title=f.b.value.trim();n.date=f.c.value;n.end_date=f.g.value||null;n.note=f.d.value.trim()}else if(t=='news'){n.cat=f.a.value;n.title=f.b.value.trim();n.date=f.c.value;n.detail=f.d.value.trim();n.pin=f.e.checked}else if(R){n.exam=f.a.value;n.title=f.b.value.trim();n.date=f.c.value;n.note=f.d.value.trim()}else{n.subject=f.a.value;n.title=f.b.value.trim();n.due=f.c.value;n.detail=f.d.value.trim()}
+try{toast('⏫ 保存中…');await save(t,n,fl);cl();toast('✅ 保存しました');}catch(x){fail(x,'保存できませんでした（通信・容量を確認）')}}}
+/* ---- theme, keys, easter eggs ---- */
+$('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark';setTimeout(upd,60)};
+let lc=0,kb=[];const KO='ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a';
+$('#logo').onclick=()=>{if(++lc>=5){lc=0;document.querySelectorAll('.nd').forEach(n=>{n.style.transition='transform 2s';n.style.transform='rotate(1440deg)'});toast('🧭 隠し機能発見！↑↑↓↓←→←→BA も試してみて');}};
+addEventListener('keydown',e=>{if(e.key=='Escape')cl();if(e.key=='/'&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)){e.preventDefault();$('#q').focus()}
+kb.push(e.key);kb=kb.slice(-10);if(kb.join()==KO){document.body.classList.toggle('rb');toast('🌈 レインボーモード！');}});
+const nrm=s=>s.normalize('NFKC').replace(/[\s\u3000\u200B-\u200F\u2028-\u202F\u2060-\u206F\uFEFF\u00AD]/g,'');
+const resv=n=>/管理人|管理者|運営|かんりにん|カンリニン|認証済|^(admin|administrator|moderator)$|[✅✔☑]/.test(nrm(n).toLowerCase().replace(/[^a-z0-9ぁ-んァ-ヶー一-龯々✅✔☑]/g,''));
+/* ---- NGワード判定 v4.2.0（語句は難読化して保持）---- */
+/*NG-START*/
+const NGD=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob('eyJhIjpbIuaEm+a2siIsIuODqeODluOCuOODpeODvOOCuSIsIuaEm+aSqyIsIumdkuWnpiIsIuacneWLg+OBoSIsIuacneODgeODpeODsyIsIui2s+OCs+OCrSIsIui2s+ODlOODsyIsIuOCouODgOODq+ODiOODk+ODh+OCqiIsIuWwv+mBkyIsIuOCouODiuODqyIsIuOCouODjOOCuSIsIuiCm+mWgCIsIuOCouODiuODq+OCvOODquODvOebuOaSsiIsIuOCouODiuODq+ODkeODvOODqyIsIuOCouODiuODq+ODleOCoeODg+OCryIsIuOCouODiuODq+OCu+ODg+OCr+OCuSIsIuiCm+mWgOaAp+S6pCIsIuOCouOBuOmhlCIsIuOBguOBuOOBguOBuCIsIuOCouODr+ODkyIsIuOCpOODqeODnuODgeOCqiIsIumZsOmDqOa0l+a1hCIsIuOCpOODs+ODneODhuODs+ODhCIsIuWLg+i1t+S4jeWFqCIsIua3q+e0iyIsIua3q+S5sSIsIua3q+OCiSIsIuODtOOCoeOCruODiiIsIuWls+aAp+WZqCIsIuijj+etiyIsIuOBhuOCk+OBkyIsIuOBhuOCk+OBoSIsIuWkp+S+vyIsIuOCqOOCr+OCueOCv+OCt+ODvCIsIlhWSURFT1MiLCLjgqLjg4Djg6vjg4jjgrXjgqTjg4giLCLjgqjjg4Pjg4EiLCLlkIzmgKfmhJvogIUiLCLjgqjjg63mnKwiLCLjgqjjg63jg57jg7Pjgqzls7YiLCLjgqTjg63jg57jg7PjgrTls7YiLCLjgYrjgYTjgarjgorjgZXjgpMiLCLpmbDlm4oiLCLjgq3jg7Pjgr/jg57ooosiLCLpu4Tph5HmsLQiLCLlmJTlkJAiLCLjgYrjgYjjgYrjgYYiLCLjgqrjg7zjgqzjgrrjg6AiLCLjgYrjgZfjgaPjgZMiLCLjgZfjgaPjgZMiLCLjgYrjgZvjgaHjgpPjgZMiLCLjgYrjgZvjgaPjgZsiLCLjgYrmjoPpmaTjg5Xjgqfjg6kiLCLlvozmiK8iLCLjgYrjgaPjgbHjgYQiLCLlpKfkurrjga7jgYrjgoLjgaHjgoMiLCLmgKflhbciLCLjgqrjg4rjg5vjg7zjg6siLCLlsL7lpYjpp4UiLCLjgqrjg4rjgq/jg6kiLCLjgqrjg4rjg4vjg7zjgq/jg6njg5YiLCLpoqjkv5ciLCLoh6rmhbAiLCLjgqrjg4rjg4vjg7wiLCLjg57jgrnjgr/jg7zjg5njg7zjgrfjg6fjg7MiLCJURU5HQSIsIuOBiuOBquOCiSIsIuaUvuWxgSIsIuOCquODleODkeOCsyIsIuOCquODnuODs+a5liIsIuOCquODoeOCrOODkOODvOOCuSIsIuS/uuOBruWwu+OCkuiIkOOCgeOCjSIsIuiyneWQiOOCj+OBmyIsIkdM44Gu5aWz5oCn5ZmoIiwi44Ks44K344Oe44OzIiwi44Kr44OD44OX6bq644Kq44OK44OL44O8Iiwi44Kr44OL44OQ44Oq44K644OgIiwi44Kr44OL57y2Iiwi44Kr44OD44OX44Oq44Oz44KwIiwi5YWc5ZCI44KP44GbIiwi55S35oCn5ZmoIiwi5oiR5oWi5rGBIiwi6auq44Kz44KtIiwi5LqA6aCtIiwi6aGU5bCEIiwi6ZGR6LOe44Os44OH44KjIiwi44Kr44Oz44OB44On44O8Iiwi5oCn5ZmoIiwi44Ku44K344Ku44K344Ki44Oz44Ki44OzIiwi5oCn6KGM54K6Iiwi6aiO5LmX5L2NIiwi44K744OD44Kv44K5Iiwi6aGU6Z2i6aiO5LmXIiwi44Kt44Oh44K744KvIiwi6Jas54mp44K744OD44Kv44K5Iiwi5Lmx5LqkIiwi6YCG44Os44Kk44OXIiwi44Os44Kk44OXIiwi44Kt44Oj44K/44OL44O8Iiwi5by344Kw44Oq44OD44OXIiwi5beo5qC5Iiwi57KX44OB44OzIiwi5beo5LmzIiwi5Lmz5oi/Iiwi54iG5LmzIiwi6LaF5LmzIiwi6LKn5LmzIiwi44Kt44Oz44K/44OeIiwi6IKh6ZaTIiwi552+5Li4Iiwi44Kv44K544KzIiwi44Kv44Oq44OI44Oq44K5Iiwi6Zmw5qC4Iiwi44Kv44Oq44Kt44Oj44OD44OXIiwi44Kv44Oz44OL44Oq44Oz44Kw44K5Iiwi57WM6aiT5Lq65pWwIiwi44GR44Gk44Gq44GC44Gq56K65a6aIiwi44Ky44OQ44OL44O8Iiwi44Ky44OtIiwi44Ky44OcIiwi44Ky44Ot6Zu7Iiwi6LOi6ICF44K/44Kk44OgIiwi5oCn5qyyIiwi5qSc5bC/44Kr44OV44KnIiwi57WM6KGA44Kr44OV44KnIiwi44Kz44Ki44Ks44K644OgIiwi44Kz44Ki44Ko44Kv44K144K144Kk44K6Iiwi5by35aemIiwi5YWs6KGG5L6/5omAIiwi6IKJ5L6/5ZmoIiwi5Y+j5YaF5bCE57K+Iiwi5Lqk5bC+Iiwi6IKh6ZaT5Lmx5bCEIiwi5Lit5Ye644GXIiwi5b+D44Gu44Gh44KT44GTIiwi44Kz44Oz44OJ44O844OgIiwi6YG/5aaK5YW3Iiwi5oCn5oSf5p+T55eHIiwi44K244O844Oh44OzIiwi56u/6YWSIiwi44Ov44Kr44Oh6YWSIiwi5YWI44Gj44Gh44KH44Gg44GRIiwi5r2u5ZC544GNIiwi6IajIiwi5LiJ6KeS5pyo6aasIiwi5Zub5Y2B5YWr5omLIiwi6Ieq5a6255m66Zu7Iiwi44GX44GT44Gj44GhIiwi44K344Kz44KLIiwi44K344O844OB44Kt44Oz44KS5re344Gc44KLIiwi44Kq44OK44OL44K544OIIiwi44K344OD44Kv44K544OK44Kk44OzIiwi6Ieq5YiG5aemIiwi5oCn55qE6a2F5YqbIiwi44K344Oi44Ov44Kt44KsIiwi5Yid5r2uIiwi5Yid57WMIiwi5Lq65qC85o6S5rOEIiwi57K+5rayIiwi5bCE57K+Iiwi5Yem5aWzIiwi542j5aemIiwi6YeN6YCj57eP5ous5Yi25b6hIiwi44K544Kr44OI44Ot44K444O8Iiwi44K544Kr44OI44OtIiwi44K544Kr44Or44OV44Kh44OD44KvIiwi44K544Kr44Or44K744OD44Kv44K5Iiwi44K544Kx44OZ5qSF5a2QIiwi44K544OV44Kj44Oz44Kv44K55aemIiwi44K544Oa44Or44OeIiwi44K644Or5Yml44GRIiwi6Zmw6IyOIiwi44K544Ov44OD44OU44Oz44KwIiwi5a+45q2i44KBIiwi5q2j5bi45L2NIiwi57K+5Yqb5YmkIiwi44K744OD44Kv44K544OV44Os44Oz44OJIiwi44K744OV44OsIiwiRldCIiwi5Y2D5pG6Iiwi44K944O844OX44Op44Oz44OJIiwi5Y2z5Y2zIiwi5Y2z5bC6Iiwi44Gg44GE44GX44KF44GN44Ob44O844Or44OJIiwi5aSq5bmz5rSL44Gn44GU44G844GG44KS5rSX44GGIiwi44Os44K644OX44Os44KkIiwi44OA44OD44OB44Ov44Kk44OVIiwi56iu5LuY44GRIiwi5a2V44G+44Gb44KLIiwi6Iaj5YaF5bCE57K+Iiwi44OB44Kv44K544OIIiwi5Lmz6aaWIiwi44OB44Oz44Kr44K5Iiwi5oGl5Z6iIiwi44Gh44KT44GQ44KK6L+U44GXIiwi44Gh44KT5q+bIiwi44Gh44KT44GTIiwi44Gh44KT44G9Iiwi44Gh44KT44Gh44KTIiwi44OH44Kj44Or44OJIiwi44OH44Oq44OY44OrIiwi5omL44Kz44KtIiwi6ISH44Kz44KtIiwi6IWL44Kz44KtIiwi5bC744Kz44KtIiwi5omL44Oe44OzIiwi56ul6LKeIiwi44Gp44GX44Gf44KT6Kmx44GN44GT44GG44GLIiwi5ZCQ54CJ54mpIiwi5oGl5LiYIiwi44OJ44Op44K044Oz44Kr44O844K744OD44Kv44K5Iiwi44OJ44Op44Kr44O8Iiwi5Lit5oqY44KMIiwi55Sf44OP44OhIiwi5LuB546L56uL44Gh44OV44Kn44OpIiwi5r+h44KM5aC0Iiwi5a+d5Y+W44KJ44KMIiwi6ISz44Kv44OB44OlIiwi44OO44Oz44KxIiwi44OR44Kk44K644OqIiwi44Ot44O844K/44O8Iiwi44OR44Kk44OR44OzIiwi6Zmw5q+bIiwi44OQ44Kt44Ol44O844Og44OV44Kn44OpIiwi44OR44Kz44OR44KzIiwi44OR44Kz44KLIiwi55m65bGV5aC0Iiwi44OP44OD44OG44Oz5aC0Iiwi44Ky44Kk44OR44OR5rS7Iiwi5o+05Yqp5Lqk6ZqbIiwi44OR44OV44Kj44O844OL44OD44OX44OrIiwi5Lmz6LyqIiwi44OP44Oh5pKu44KKIiwi44OR44Oz44OB44OpIiwi44OU44K544OI44Oz6YGL5YuVIiwi5aqa6JasIiwi44OU44Ot44O844OI44O844KvIiwiRkFOWkEiLCLjg5XjgqPjgrnjg4jjg5XjgqHjg4Pjgq8iLCLpoqjkv5flrKIiLCLjg5Xjg7zjg4njg6siLCLjg5Xjgqfjg6njg4HjgqoiLCLjgbXjgZ/jgarjgooiLCLnrYbjgYrjgo3jgZciLCLjg5fjg63jg6zjgrnjgZTjgaPjgZMiLCLjg5rjg4Pjg4bjgqPjg7PjgrAiLCLjg5njg4Pjg4njgqTjg7MiLCLjg5rjg4vjgrkiLCLjgb3jgYTjgb3jgYTjgb3jgYTjgb3jgb3jgYTjgb3jgYTjgb3jgbTjg7wiLCLljIXojI4iLCLjgbzjgYbjgavjgYLjgarjgosiLCLjg5vjg7zjg5/jg7wiLCLli4PotbciLCLjg53jg6rjg43jgrfjgqLjg7Pjgrvjg4Pjgq/jgrkiLCLjg53jg6vjg47jgrDjg6njg5XjgqMiLCLjg53jg6vjg44iLCJQb3JuaHViIiwi5oOa44KM6JasIiwi44Oe44K544KS44GL44GPIiwi44Oe44OI44Oq44On44O844K35aemIiwi44G+44KT44GTIiwi5ryr5rmWIiwi44Oe44Oz5rGBIiwi44G/44GT44GZ44KK5Y2KIiwi5LiJ5pOm44KK5Y2KIiwi5a+G552A6YCj57WQ5ZmoIiwi44Oh44K544Ks44KtIiwi44KC44GG6LWk44Gh44KD44KT5L2c44KM44Gd44GG44Gq5L2T44Gg44GtIiwi5paH5a2X44OL44O8Iiwi44Oi44OW44Os44Kk44OXIiwi44Ok44Kt44Oe44Oz44KzIiwi44Ok44Oq44Oe44OzIiwi44Ok44Oq44Oi44KvIiwi6YGK6YOtIiwi5aSc44Gu5Za244G/Iiwi44Op44OW44Ob44OG44OrIiwi44Op44OW44ObIiwi44Oq44OZ44Oz44K444Od44Or44OOIiwi5b6p6K6Q44Od44Or44OOIiwi55Gg55KD5YWJ5aaC5p2lIiwi44Ot44O844K344On44OzIiwi44OU44Oz44Kv44Ot44O844K/44O8Iiwi44KN44GP44Gn44Gq44GX5a2QIiwi55+u5Lq65Zec5aW9Iiwi44Of44Kv44Ot44OV44Kj44Oq44KiIiwi44Ov44Oz44OK44Kk44OIIiwi6Zmw5ZqiIiwi44OQ44Ku44OKIiwi44Kq44OK44ObIiwi44K744Kv44Ot44K5Iiwi44OR44OR5rS7IiwiZWNjaGkiLCJwb3JuIiwiZGlsZG8iLCJ2YWdpbmEiLCJwZW5pcyIsIm9yZ2FzbSIsIm1hc3R1cmJhdGlvbiIsIm9uYW5pZSIsImNoaW5rbyIsImNoaW5wbyIsImNoaW5jaGluIiwibWFua28iLCJvcHBhaSIsInVua28iLCJzZWtrdXN1Il0sImIiOlsiQVYiLCLnqbQiLCJBRiIsIkVEIiwi5oCn55qEIiwi6buE6YeRIiwi54qv44GZIiwi5bC/Iiwi44OQ44Kk44OWIiwiQkwiLCLlvITjgosiLCLjgrTjg6AiLCLnq78iLCLmjL/lhaUiLCJTTSIsIumbu+ODniIsIuWLleOBguOCiiIsIkRUIiwi6YGT56iLIiwi5Zyf5omLIiwiTlRSIiwiUOa0uyIsIuODkeODs+ODhCIsIuOBvuOBquadvyIsIuOCguOBhui1pCIsIumAo+e1kCIsInNleCIsImFuYWwiXSwiYyI6WyLjgqLjgq/jg6EiLCLjgqrjg4oiLCLjgqvjg6oiLCLjgq3jg57jgaPjgZ8iLCLjgq/jg7Pjg4siLCLjgr/jg4EiLCLjg4/jg6HjgosiLCLjg6TjgosiLCLjg6rjg6fjg4oiXX0='),c=>c.charCodeAt(0))));
+const kf=s=>s.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)),kk=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
+const nf=s=>String(s).normalize('NFKC').toLowerCase().replace(/[\u0300-\u036f\u3099\u309a\u00ad\u200b-\u200f\u2028-\u202f\u2060-\u206f\ufe00-\ufe0f\ufeff]/g,'');
+const WCR=/[○●◯〇◎×✕✖*?☆★■□◆◇▲△▽▼♡♥_◌☓✗✘]/,LTR=/[\p{L}\p{N}]/u,OKW=['えっちんぐ','うんちく','たちこく'];
+function prep(s,wc){const o=[],g=[];let gp=0;for(const ch of nf(s)){let r=null;if(wc&&WCR.test(ch))r='\u0001';else if(LTR.test(ch)&&ch!='〇')r=kf(ch);if(r==null){gp++;continue}for(let k=0;k<r.length;k++){o.push(r[k]);g.push(k?0:gp)}gp=0}let t=o.join('');OKW.forEach(w=>t=t.split(w).join('\u0002'.repeat(w.length)));return{s:t,g}}
+const NGA=NGD.a.map(w=>prep(w,0).s),NGBS=new Set(NGD.b.map(w=>prep(w,0).s)),esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const NGBR=[...NGD.b.map(w=>[w,kf(nf(w)),kk(kf(nf(w)))]),...NGD.c.map(w=>[w])].map(v=>new RegExp('(^|[^\\p{L}\\p{N}])('+[...new Set(v.map(x=>esc(nf(x))))].join('|')+')($|[^\\p{L}\\p{N}]|[ぁ-ん])','u'));
+function ngA(P,wc){const t=P.s;for(const w of NGA){const n=w.length;if(!wc){let i=-1;while((i=t.indexOf(w,i+1))>=0){let c=0;for(let k=i+1;k<i+n;k++)c+=P.g[k]?1:0;if(n>3||c!=1)return 1}}else if(n>2)for(let i=0;i+n<=t.length;i++){let x=0,k=0;for(let j=0;j<n;j++){const a=t[i+j];if(a==w[j])x++;else if(a=='\u0001')k++;else{x=-1;break}}if(x>=2&&k&&x>=k&&(n>3||(t[i]!='\u0001'&&t[i+n-1]!='\u0001')))return 1}}return 0}
+function ngHit(s){s=String(s||'');const P=prep(s,0);return NGBS.has(P.s)||NGBR.some(r=>r.test(nf(s)))||ngA(P,0)||ngA(prep(s,1),1)?true:false}
+/*NG-END*/
+
+function cardC(c,rp){return `<div class="ci${rp?' rp':''}${c.pinned?' pin':''}"><b>${E(!c.admin&&resv(c.name)?'名無しさん':c.name)}</b>${c.admin?'<span class="vf">✅ 認証済み</span>':''}${c.pinned?'<span class="vf" style="color:var(--b);border-color:var(--b)">📌 固定</span>':''}${Date.now()-(+c.ts)<64800000?'<span class="vf" style="color:var(--c);border-color:var(--c)">🆕 新規</span>':''} <small>${new Date(+c.ts).toLocaleString('ja-JP')}</small><p style="white-space:pre-wrap">${E(c.text)}</p><button class="lk${LKL.has(c.id)?' on':''}" data-lk="${E(c.id)}">👍 ${c.likes||0}</button> <button class="lk" data-rp="${E(c.id)}">↩ 返信</button> ${!c.parent_id?`<button class="cx" data-pin="${E(c.id)}">${c.pinned?'📌 固定解除':'📌 固定'}</button> `:''}<button class="cx" data-cd="${E(c.id)}">🗑 削除</button>${AD&&IPM[c.id]?`<small class="ipt"> 🌐 ${E(IPM[c.id])}</small>`:''}</div>`}
+function drawC(){let tp=CMT.filter(c=>!c.parent_id).sort((a,b)=>(!!b.pinned-!!a.pinned)||b.ts-a.ts),more=HM;if(!SB){more=tp.length>CN;tp=tp.slice(0,CN)}
+$('#cl').innerHTML=(tp.length?tp.map(c=>cardC(c)+CMT.filter(r=>r.parent_id==c.id).sort((a,b)=>a.ts-b.ts).map(r=>cardC(r,1)).join('')).join(''):'<p class="empty" style="padding:20px">まだコメントはありません。最初の1件を書いてみよう！</p>')+(more?'<p style="text-align:center;margin-top:14px"><button class="btn g" id="more">⬇ もっと見る（20件ずつ）</button></p>':'')}
+function setRT(c){RT=c?{id:c.parent_id||c.id,name:c.name,pre:c.parent_id?'@'+c.name+' ':''}:null;const b=$('#rpl');b.hidden=!RT;if(!RT)b.innerHTML='';if(RT){b.innerHTML=`<span>↩ 「${E(RT.name)}」に返信中</span><button class="lk" id="rx">✕ やめる</button>`;if(RT.pre&&!$('#ct').value)$('#ct').value=RT.pre;$('.cmf').scrollIntoView({behavior:'smooth',block:'center'});$('#ct').focus()}}
+$('#rpl').onclick=e=>{if(e.target.id=='rx')setRT(null)};
+$('#cs').onclick=async()=>{if($('#hp').value)return;if(Date.now()-T_LOAD<3000)return toast('もう少し待ってから投稿してね');const t=$('#ct').value.trim();if(!t)return toast('コメントを入力してね');if(Date.now()-lastP<15000)return toast('少し待ってから投稿してね');
+const nm=($('#cn').value.trim()||'名無しさん').slice(0,20),adm=nrm(nm)=='管理人';
+if(resv(nm)&&!(AD&&adm))return toast('その名前は使えません（「管理人」など運営を思わせる名前は予約されています）');
+if(ngHit(nm)||ngHit(t))return toast('使えない言葉が含まれています。書き直してね');
+const it={id:'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:nm,text:t.slice(0,200),ts:Date.now(),likes:0,admin:!!(AD&&adm),parent_id:RT?RT.id:null};
+try{if(SB){await api('/rest/v1/comments',{method:'POST',headers:{...JH,Prefer:'return=minimal'},body:JSON.stringify(it)});await load()}else{CMT.push(it);SV('tn_comments',CMT);drawC()}$('#ct').value='';setRT(null);lastP=Date.now();toast('💬 投稿しました！')}catch(e){fail(e,'投稿できませんでした')}};
+$('#cl').onclick=async e=>{if(e.target.id=='more'){CN+=20;load();return}
+const pn=e.target.closest('[data-pin]');if(pn){const id=pn.dataset.pin,c=CMT.find(x=>x.id==id),v=!(c&&c.pinned);try{if(SB){await api('/rest/v1/comments?id=eq.'+encodeURIComponent(id),{method:'PATCH',headers:{...JH,Prefer:'return=minimal'},body:JSON.stringify({pinned:v})});await load()}else{if(c)c.pinned=v;SV('tn_comments',CMT);drawC()}toast(v?'📌 固定しました':'固定を解除しました')}catch(x){fail(x,'固定できませんでした')}return}
+const r=e.target.closest('[data-rp]');if(r){const c=CMT.find(x=>x.id==r.dataset.rp);if(c)setRT(c);return}
+const k=e.target.closest('[data-lk]');if(k){const id=k.dataset.lk,on=!LKL.has(id),c=CMT.find(x=>x.id==id);try{if(SB)await api('/rest/v1/rpc/like_comment',{method:'POST',headers:JH,body:JSON.stringify({cid:id,d:on?1:-1})});on?LKL.add(id):LKL.delete(id);if(c)c.likes=Math.max(0,(c.likes||0)+(on?1:-1));SV('tn_likes',[...LKL]);if(!SB)SV('tn_comments',CMT);drawC()}catch(x){fail(x,'👍できませんでした')}return}
+const b=e.target.closest('.cx');if(!b)return;const id=b.dataset.cd;try{if(SB){await api('/rest/v1/comments?id=eq.'+encodeURIComponent(id),{method:'DELETE'});await load()}else{CMT=CMT.filter(c=>c.id!=id&&c.parent_id!=id);SV('tn_comments',CMT);drawC()}toast('🗑 削除しました')}catch(x){fail(x,'削除できませんでした')}};
+/* ---- about page routing ---- */
+const hh=()=>document.documentElement.style.setProperty('--hh',$('header').offsetHeight+'px');hh();addEventListener('resize',hh);document.fonts&&document.fonts.ready.then(hh);
+$('#cmj').onclick=()=>{if(location.hash=='#about')location.hash='home';setTimeout(()=>$('#cm').scrollIntoView({behavior:'smooth',block:'start'}),location.hash=='#about'?250:0)};
+const tt_=$('#totop');addEventListener('scroll',()=>tt_.classList.toggle('show',scrollY>500),{passive:true});tt_.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+function route(){const a=location.hash=='#about';$('#home').hidden=a;$('#ab').hidden=!a;$('#abt').textContent=a?'← ホームへ':'ℹ️ 当サイトについて';scrollTo(0,0);if(!a)setTimeout(ind,30)}
+addEventListener('hashchange',route);$('#abt').onclick=()=>{location.hash=location.hash=='#about'?'home':'about'};route();
+</script>
+<script src="https://ai-sensei.studix-app.workers.dev/embed.js" async></script>
+</body>
+</html>
