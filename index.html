@@ -189,7 +189,7 @@ main{padding:10px 12px 90px}
   <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 考査の練習問題解くならたちこくナビneo! →</a></div></div>
     <div class="tools"><input id="q" placeholder="🔍 検索（/ キーで移動）"><div id="chips" style="display:contents"></div></div>
   <div class="grid" id="grid"></div>
-<section id="cm"><h2>💬 みんなのコメント</h2><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
+<section id="cm"><h2>💬 みんなのコメント（荒らさないでね）</h2><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
 </main>
 <main id="ab" class="pg" hidden>
   <h1 style="font-size:clamp(30px,6vw,52px);padding:24px 0 6px">当サイトについて</h1>
@@ -199,7 +199,7 @@ main{padding:10px 12px 90px}
     <div class="fc"><b>📄 範囲表</b><p>どの考査（例：2学期期末考査）のものかが一目でわかる形で、範囲表のPDFをダウンロード・閲覧できます。試験日や備考も確認できます。</p></div>
     <div class="fc"><b>📝 課題</b><p>教科・期限・内容を一覧で確認。「あと何日」がカウントダウンされ、期限が近いものは赤く光って知らせます。終わったら「完了」にチェックすれば、達成率リングが伸びます。</p></div>
     <div class="fc"><b>📢 お知らせ・ニュース</b><p>行事の変更や重要な連絡を掲載します。ピン留めされたお知らせは先頭に表示され、最新の1件はトップにも顔を出します。</p></div>
-    <div class="fc"><b>💬 コメント</b><p>ページ下部のコメント欄で、感想や要望を気軽に書き込めます。不適切なコメントは管理者が削除します。👍で共感も伝えられます。</p></div>
+    <div class="fc"><b>💬 コメント</b><p>ページ下部のコメント欄で、感想や要望を気軽に書き込めます。不適切なコメントは管理者が削除します。👍で共感も伝えられます。荒らしコメント対策機能追加しました。</p></div>
     <div class="fc"><b>📅 日程カウントダウン</b><p>考査や模試の日程を登録すると、「考査まであと◯日」「模試まであと◯日」がトップに表示されます。</p></div>
     <div class="fc"><b>🔍 検索と絞り込み</b><p>キーワード検索と、考査・教科ごとの絞り込みができます。「/」キーを押すとすぐ検索欄に移動できます。</p></div>
     <div class="fc"><b>🌓 見た目の切替</b><p>ダークモードとライトモードをボタンひとつで切り替えられます。こっそり隠し機能もあるかも？</p></div>
@@ -229,6 +229,7 @@ main{padding:10px 12px 90px}
 <script src="https://adm.shinobi.jp/s/07074144279ef4dc8eccf810c9cf9d9e"></script>
 <!-- admax -->
 <details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-26　v4.1.0</li>
 <li>2026-11-26　v4.0.0</li>
 <li>2026-11-25　v3.1.3</li>
 <li>2026-11-21　v3.1.2</li>
@@ -286,7 +287,7 @@ async function load(first){
  if(!SB){S.ranges=LS('tn_ranges');S.tasks=LS('tn_tasks').filter(x=>!(dys(x.due)<=-3));SV('tn_tasks',S.tasks);S.news=LS('tn_news');S.events=LS('tn_events');CMT=LS('tn_comments');S.l=1;render(first);drawC();return}
  if(first)api('/rest/v1/rpc/purge_old_tasks',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});
  try{const [a,b,c,ev,t]=await Promise.all([...['ranges','tasks','news'].map(x=>api('/rest/v1/'+x+'?select=*')),api('/rest/v1/events?select=*').catch(()=>[]),api('/rest/v1/comments?select=*&parent_id=is.null&order=pinned.desc,ts.desc&limit='+(CN+1)).catch(()=>api('/rest/v1/comments?select=*&parent_id=is.null&order=ts.desc&limit='+(CN+1)))]);HM=t.length>CN;const tp=t.slice(0,CN),rp=tp.length?await api('/rest/v1/comments?select=*&order=ts.asc&parent_id=in.('+tp.map(x=>x.id).join(',')+')'):[];S.ranges=a;S.tasks=b.filter(x=>!(dys(x.due)<=-3));if(AD&&TOK)b.filter(x=>dys(x.due)<=-3).forEach(x=>api('/rest/v1/tasks?id=eq.'+encodeURIComponent(x.id),{method:'DELETE'}).then(()=>delF(x.url)).catch(()=>{}));S.news=c;S.events=ev;CMT=[...tp,...rp];IPM={};if(AD&&TOK&&CMT.length){try{(await api('/rest/v1/comment_ips?select=comment_id,ip&comment_id=in.('+CMT.map(x=>x.id).join(',')+')')).forEach(x=>IPM[x.comment_id]=x.ip)}catch(e){}}S.l=1;render(first);drawC()}catch(e){S.l=1;render(first);toast('データを読み込めませんでした')}}
-load(1);$('#ft').textContent='🧭 たちこくナビ v4.0.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
+load(1);$('#ft').textContent='🧭 たちこくナビ v4.1.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
 if(SB)setInterval(()=>{if($('#md').hidden&&!document.hidden)load()},60000);
 const delF=u=>{const p=(u||'').split('/public/files/')[1];if(p&&SB)api('/storage/v1/object/files/'+p,{method:'DELETE'}).catch(()=>{})};
 async function save(t,o,file){
