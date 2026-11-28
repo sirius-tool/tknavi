@@ -168,6 +168,15 @@ main{padding:10px 12px 90px}
 .cbn .arw{margin-left:auto;font-size:26px;font-weight:900;color:var(--b);transition:.25s}.cbn:hover .arw{translate:6px 0}
 @media(prefers-reduced-motion:reduce){.cbn{animation:none}}
 .lgl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}.lgl a{text-decoration:none;color:var(--fg)}.lgl a small{display:block;color:var(--mut);font-weight:500;margin-top:2px}
+
+.tt{margin-top:10px;font-size:14px}.tt summary{cursor:pointer;font-weight:700;color:var(--a);user-select:none}
+.ttr{margin-top:8px;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--a) 10%,transparent)}
+.ttr b{font-size:13px}.ttr ol{list-style:none;counter-reset:p;padding:0;margin:4px 0 0}
+.ttr li{counter-increment:p;display:flex;gap:8px;margin:2px 0}.ttr li::before{content:counter(p) "限";flex:none;min-width:2.4em;color:var(--mut);font-weight:700}
+.pvr{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:12px}
+.pvb{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;text-decoration:none;color:var(--fg);font-weight:900;background:var(--card);border:1px solid var(--bd);transition:.25s}
+.pvb:hover{translate:0 -4px;border-color:var(--b);box-shadow:0 10px 24px color-mix(in srgb,var(--b) 30%,transparent)}
+.pvb small{display:block;color:var(--mut);font-weight:500;font-size:11px}.pvb .ic{font-size:26px;line-height:1}.pvb .arw{margin-left:auto;color:var(--b);font-size:20px}
 </style>
 </head>
 <body>
@@ -194,7 +203,7 @@ main{padding:10px 12px 90px}
   <section class="cdn" id="cdn"></section>
   <div id="nb" class="nbn"></div>
   <div class="tkw"><div class="tk" id="tk"></div></div>
-  <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 考査の練習問題解くならたちこくナビneo! →</a></div></div>
+  <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 考査の練習問題解くならたちこくナビneo! →</a></div><div class="pvr"><a class="pvb" href="promo-navi.html" target="_blank" rel="noopener"><span class="ic">🎬</span><span>たちこくナビ プロモーションビデオはこちら<small>約45秒でわかる、たちこくナビ</small></span><span class="arw">→</span></a><a class="pvb" href="promo.html" target="_blank" rel="noopener"><span class="ic">🎬</span><span>たちこくコミュニティ プロモーションビデオはこちら<small>30秒でわかる、みんなの広場</small></span><span class="arw">→</span></a></div></div>
     <div class="tools"><input id="q" placeholder="🔍 検索（/ キーで移動）"><div id="chips" style="display:contents"></div></div>
   <div class="grid" id="grid"></div>
 <section id="cm"><h2>💬 みんなのコメント（荒らさないでね）</h2><a class="cbn" href="https://sirius-tool.github.io/tk-community" target="_blank" rel="noopener noreferrer"><span class="ico">📣</span><span><b>自由なコメントはこちらへ！</b><small>みんなで自由に話せるコミュニティページを開きます（外部サイト）</small></span><span class="arw">→</span></a><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
@@ -208,7 +217,7 @@ main{padding:10px 12px 90px}
     <div class="fc"><b>📝 課題</b><p>教科・期限・内容を一覧で確認。「あと何日」がカウントダウンされ、期限が近いものは赤く光って知らせます。終わったら「完了」にチェックすれば、達成率リングが伸びます。</p></div>
     <div class="fc"><b>📢 お知らせ・ニュース</b><p>行事の変更や重要な連絡を掲載します。ピン留めされたお知らせは先頭に表示され、最新の1件はトップにも顔を出します。</p></div>
     <div class="fc"><b>💬 コメント</b><p>ページ下部のコメント欄で、感想や要望を気軽に書き込めます。不適切なコメントは管理者が削除します。👍で共感も伝えられます。荒らしコメント対策機能追加しました。不適切な言葉（NGワード）は、伏せ字や記号をはさんでも自動で投稿できなくなります。</p></div>
-    <div class="fc"><b>📅 日程カウントダウン</b><p>考査や模試の日程を登録すると、「考査まであと◯日」「模試まであと◯日」がトップに表示されます。</p></div>
+    <div class="fc"><b>📅 日程カウントダウン</b><p>考査や模試の日程を登録すると、「考査まであと◯日」「模試まであと◯日」がトップに表示されます。考査の時間割（1日目・2日目…の教科）も登録でき、カードから確認できます。</p></div>
     <div class="fc"><b>🔍 検索と絞り込み</b><p>キーワード検索と、考査・教科ごとの絞り込みができます。「/」キーを押すとすぐ検索欄に移動できます。</p></div>
     <div class="fc"><b>🌓 見た目の切替</b><p>ダークモードとライトモードをボタンひとつで切り替えられます。こっそり隠し機能もあるかも？</p></div>
   </div>
@@ -243,6 +252,7 @@ main{padding:10px 12px 90px}
 <script src="https://adm.shinobi.jp/s/dd1c81c89a0db725761bf01383af9a92"></script>
 <!-- admax -->
 <details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-28　v4.4.0</li>
 <li>2026-11-28　v4.3.0</li>
 <li>2026-11-27　v4.2.0</li>
 <li>2026-11-26　v4.1.0</li>
@@ -278,6 +288,8 @@ const hue=s=>[...String(s)].reduce((a,c)=>a+c.charCodeAt(0)*47,0)%360;
 let CMT=[],IPM={},lastP=0,CN=20,HM=false,RT=null,LKL=new Set(LS('tn_likes'));let S={ranges:[],tasks:[],news:[],events:[]},tab='ranges',flt='',AD=false,DN=new Set(LS('tn_done'));
 const T0=()=>{const d=new Date();d.setHours(0,0,0,0);return d},dys=s=>Math.round((new Date(s+'T00:00')-T0())/864e5);
 const fd=s=>typeof s=='number'?new Date(s).toLocaleDateString('ja-JP'):new Date(s+'T00:00').toLocaleDateString('ja-JP',{month:'long',day:'numeric',weekday:'short'});
+const ttTxt=x=>(x.timetable||[]).map(d=>(d.subs||[]).join(' ')).join(' ');
+const ttHTML=x=>{const t=x.timetable||[],n=t.filter(d=>d&&(d.subs||[]).length).length;if(!n)return'';return`<details class="tt"><summary>🗓 時間割を見る（${n}日間）</summary>`+t.map((d,i)=>(d&&(d.subs||[]).length)?`<div class="ttr"><b>${i+1}日目${d.date?'　'+new Date(d.date+'T00:00').toLocaleDateString('ja-JP',{month:'numeric',day:'numeric',weekday:'short'}):''}</b><ol>${d.subs.map(s=>`<li>${E(s)}</li>`).join('')}</ol></div>`:'').join('')+'</details>'};
 let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 /* ---- background: static stars (drawn once) + compass needle ---- */
 const cv=$('#bg'),cx=cv.getContext('2d'),P=Array.from({length:140},()=>({x:Math.random(),y:Math.random(),z:Math.random()*.9+.1,r:Math.random()*1.6+.6}));let W,H,col='#5ee7ff';
@@ -300,7 +312,7 @@ async function load(first){
  if(!SB){S.ranges=LS('tn_ranges');S.tasks=LS('tn_tasks').filter(x=>!(dys(x.due)<=-3));SV('tn_tasks',S.tasks);S.news=LS('tn_news');S.events=LS('tn_events');CMT=LS('tn_comments');S.l=1;render(first);drawC();return}
  if(first)api('/rest/v1/rpc/purge_old_tasks',{method:'POST',headers:JH,body:'{}'}).catch(()=>{});
  try{const [a,b,c,ev,t]=await Promise.all([...['ranges','tasks','news'].map(x=>api('/rest/v1/'+x+'?select=*')),api('/rest/v1/events?select=*').catch(()=>[]),api('/rest/v1/comments?select=*&parent_id=is.null&order=pinned.desc,ts.desc&limit='+(CN+1)).catch(()=>api('/rest/v1/comments?select=*&parent_id=is.null&order=ts.desc&limit='+(CN+1)))]);HM=t.length>CN;const tp=t.slice(0,CN),rp=tp.length?await api('/rest/v1/comments?select=*&order=ts.asc&parent_id=in.('+tp.map(x=>x.id).join(',')+')'):[];S.ranges=a;S.tasks=b.filter(x=>!(dys(x.due)<=-3));S.news=c;S.events=ev;CMT=[...tp,...rp];S.l=1;render(first);drawC()}catch(e){S.l=1;render(first);toast('データを読み込めませんでした')}}
-load(1);$('#ft').textContent='🧭 たちこくナビ v4.2.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
+load(1);$('#ft').textContent='🧭 たちこくナビ v4.4.0 ・ '+(SB?'☁ 共有モード':'💾 デモモード（この端末のみ保存・Supabase未設定）');
 if(SB)setInterval(()=>{if(!document.hidden)load()},60000);
 async function dl(o){try{const b=await (await fetch(o.url)).blob(),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=o.fn||'file.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('⬇ 保存しました')}catch(e){window.open(o.url,'_blank')}}
 /* ---- render ---- */
@@ -309,7 +321,7 @@ $('#cdn').innerHTML=pk.map(([k,x])=>{if(!x)return`<div class="cdc" style="--h:${
 function cnt(el,n){const f=+el.textContent||0,s=performance.now();(function u(t){const k=Math.min(1,(t-s)/700);el.textContent=Math.round(f+(n-f)*k);if(k<1)requestAnimationFrame(u)})(s)}
 function card(x,i,a){const R=tab=='ranges',N=tab=='news',V=tab=='events',h=hue(V?x.kind:N?x.cat:R?x.exam:x.subject),pre=`<article class="card${a?'':' in sx'}" style="--h:${h};--i:${i}" data-id="${x.id}">`;
 const fl=`<div class="ac">${x.url?`<button data-dl="${x.id}">⬇ ダウンロード</button><a href="${E(x.url)}" target="_blank" rel="noopener">👁 開く</a>`:''}</div>`;
-if(V){const d=dys(x.date),de=dys(x.end_date||x.date),lb=d>0?`あと${d}日`:de>=0?(d==0&&de==0?'今日！':'実施中！'):'終了';return pre.replace('class="card','class="card'+(de<0?' over':d>=0&&d<=7?' hot':''))+`<span class="badge">${E(x.kind)}</span><h3>${E(x.title)}</h3><div class="cd">⏳ ${lb}</div><p>📅 ${fd(x.date)}${x.end_date&&x.end_date!=x.date?' 〜 '+fd(x.end_date):''}</p>${x.note?`<p>${E(x.note)}</p>`:''}`+fl+'</article>'}
+if(V){const d=dys(x.date),de=dys(x.end_date||x.date),lb=d>0?`あと${d}日`:de>=0?(d==0&&de==0?'今日！':'実施中！'):'終了';return pre.replace('class="card','class="card'+(de<0?' over':d>=0&&d<=7?' hot':''))+`<span class="badge">${E(x.kind)}</span><h3>${E(x.title)}</h3><div class="cd">⏳ ${lb}</div><p>📅 ${fd(x.date)}${x.end_date&&x.end_date!=x.date?' 〜 '+fd(x.end_date):''}</p>${x.note?`<p>${E(x.note)}</p>`:''}${ttHTML(x)}`+fl+'</article>'}
 if(N)return pre+`<span class="badge">${x.pin?'📌 ':''}${E(x.cat)}</span><h3>${E(x.title)}</h3><p style="white-space:pre-wrap">${E(x.detail)}</p><small>🗓 ${fd(x.date)}</small>`+fl+'</article>';
 if(R)return pre+`<span class="badge">${E(x.exam)}</span><h3>${E(x.title)}</h3>${x.date?`<p>🗓 試験日：${fd(x.date)}</p>`:''}${x.note?`<p>${E(x.note)}</p>`:''}<small>更新：${fd(x.updated||0)}</small>${fl}</article>`;
 const d=dys(x.due),dn=DN.has(x.id),lb=d<0?`${-d}日超過`:d==0?'今日まで！':d==1?'明日まで':`あと${d}日`;
@@ -317,7 +329,7 @@ return pre.replace('class="card','class="card'+(dn?' dn':d<0?' over':d<=1?' hot'
 function render(a){const R=tab=='ranges',k=x=>tab=='events'?x.kind:tab=='news'?x.cat:R?x.exam:x.subject,all=S[tab],q=$('#q').value.trim().toLowerCase();
 if(flt&&!all.some(x=>k(x)==flt))flt='';
 $('#chips').innerHTML=['',...new Set(all.map(k))].map(c=>`<button class="chip${c==flt?' on':''}" data-f="${E(c)}">${c?E(c):'すべて'}</button>`).join('');
-let l=all.filter(x=>(!flt||k(x)==flt)&&[x.title,x.exam,x.subject,x.note,x.detail,x.kind,x.cat].join(' ').toLowerCase().includes(q));
+let l=all.filter(x=>(!flt||k(x)==flt)&&[x.title,x.exam,x.subject,x.note,x.detail,x.kind,x.cat,ttTxt(x)].join(' ').toLowerCase().includes(q));
 l.sort(tab=='events'?(x,y)=>{const a=dys(x.end_date||x.date)<0,b=dys(y.end_date||y.date)<0;return a!=b?a-b:a?(y.date>x.date?1:-1):(x.date<y.date?-1:1)}:tab=='news'?(x,y)=>(!!y.pin-!!x.pin)||(y.date>x.date?1:y.date<x.date?-1:0):R?(x,y)=>(y.updated||0)-(x.updated||0):(x,y)=>{const a=dys(x.due)<0,b=dys(y.due)<0;return a!=b?a-b:a?(y.due>x.due?1:-1):(x.due<y.due?-1:1)});
 $('#grid').innerHTML=l.length?l.map((x,i)=>card(x,i,a)).join(''):`<div class="empty">${S.l||!SB?'📭 まだ何もありません':'🛰 読み込み中…'}</div>`;
 if(a){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.card:not(.in)').forEach(c=>io.observe(c));setTimeout(()=>document.querySelectorAll('.card').forEach(c=>c.classList.add('in')),900)}
