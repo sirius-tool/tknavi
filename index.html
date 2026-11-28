@@ -160,6 +160,14 @@ main{padding:10px 12px 90px}
 .lk{background:none;border:1px solid var(--bd);border-radius:99px;padding:2px 12px;font-size:13px;transition:.2s}#fp.lk{border:0;text-decoration:underline;color:var(--mut)}.lk:hover{translate:0 -3px;scale:1.1;border-color:var(--a)}.lk.on{background:var(--a);color:#001;border-color:var(--a)}.lk:active{scale:.9}
 .pg h2{margin:30px 0 8px;font-size:22px;border-left:5px solid var(--a);padding-left:12px}.pg p,.pg li{color:var(--mut);margin:6px 0}.pg ul{padding-left:22px}.pg .lead{font-size:17px;color:var(--fg)}
 .fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:14px}.fc{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;transition:.25s}.fc:hover{translate:0 -8px;scale:1.03;box-shadow:0 16px 36px color-mix(in srgb,var(--b) 30%,transparent)}.fc b{font-size:17px}
+.cbn{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:16px 20px;border-radius:20px;text-decoration:none;color:var(--fg);background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a)) border-box;background-size:auto,300% 100%;border:3px solid transparent;animation:sh 5s linear infinite,bn 2.4s infinite;transition:.25s}
+.cbn:hover{translate:0 -4px;scale:1.02}
+.cbn .ico{font-size:32px;line-height:1}
+.cbn b{display:block;font-size:clamp(18px,5vw,25px);font-weight:900;line-height:1.3}
+.cbn small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.cbn .arw{margin-left:auto;font-size:26px;font-weight:900;color:var(--b);transition:.25s}.cbn:hover .arw{translate:6px 0}
+@media(prefers-reduced-motion:reduce){.cbn{animation:none}}
+.lgl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}.lgl a{text-decoration:none;color:var(--fg)}.lgl a small{display:block;color:var(--mut);font-weight:500;margin-top:2px}
 </style>
 </head>
 <body>
@@ -189,7 +197,7 @@ main{padding:10px 12px 90px}
   <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 学習管理アプリ「STUDIX」も是非ご利用ください！ →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 考査の練習問題解くならたちこくナビneo! →</a></div></div>
     <div class="tools"><input id="q" placeholder="🔍 検索（/ キーで移動）"><div id="chips" style="display:contents"></div></div>
   <div class="grid" id="grid"></div>
-<section id="cm"><h2>💬 みんなのコメント（荒らさないでね）</h2><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
+<section id="cm"><h2>💬 みんなのコメント（荒らさないでね）</h2><a class="cbn" href="https://sirius-tool.github.io/tk-community" target="_blank" rel="noopener noreferrer"><span class="ico">📣</span><span><b>自由なコメントはこちらへ！</b><small>みんなで自由に話せるコミュニティページを開きます（外部サイト）</small></span><span class="arw">→</span></a><div class="cmf"><div id="rpl" class="rpb" hidden></div><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;opacity:0"><input id="cn" maxlength="20" placeholder="ニックネーム（任意・20字まで）"><textarea id="ct" maxlength="200" placeholder="コメントを書く…（200字まで。個人情報や誹謗中傷は書かないでね）"></textarea><button class="btn" id="cs">投稿する</button></div><div id="cl"></div></section>
 </main>
 <main id="ab" class="pg" hidden>
   <h1 style="font-size:clamp(30px,6vw,52px);padding:24px 0 6px">当サイトについて</h1>
@@ -220,32 +228,9 @@ main{padding:10px 12px 90px}
     <li>このサイトは検索しても出てきません。リンクを知っている人だけが使えるサイトです。</li>
   <li>不正アクセス対策のため、コメント投稿時のIPアドレスを、管理者だけが見られる形で記録しています。不正アクセスには断固とした対応を取ります。</li>
   </ul>
-  <h2 id="pp">プライバシーポリシー</h2>
-  <p>「たちこくナビ」（以下「当サイト」）は、利用者の情報を次のとおり取り扱います。</p>
-  <h3 style="margin:20px 0 4px;font-size:16px">1. 取得する情報と利用目的</h3>
-  <ul>
-    <li><b>コメント投稿時の情報</b>：ニックネーム、コメント本文、投稿日時、IPアドレス。コメントの表示と、荒らし・不正アクセスの防止および対応のために利用します。IPアドレスは管理者のみが閲覧でき、公開されません。</li>
-    <li><b>端末に保存される情報</b>：課題の「完了」チェックや👍の押下状況は、お使いのブラウザ（localStorage）にのみ保存され、当サイトのサーバーには送信されません。ブラウザのデータを消去すると削除できます。</li>
-    <li><b>閲覧時に自動で送信される情報</b>：下記の外部サービスには、閲覧時にIPアドレスやブラウザの種類などの情報が送信されます。</li>
-  </ul>
-  <h3 style="margin:20px 0 4px;font-size:16px">2. 利用している外部サービス</h3>
-  <ul>
-    <li>Supabase：コメント・範囲表・課題などのデータとPDFファイルの保管</li>
-    <li>Google Fonts：フォントの配信</li>
-    <li>忍者AdMax（adm.shinobi.jp）：広告の配信</li>
-    <li>AIアシスタント機能（ai-sensei.studix-app.workers.dev）：機能の提供</li>
-  </ul>
-  <p>各サービスでの情報の取り扱いは、それぞれの提供元の定めに従います。</p>
-  <h3 style="margin:20px 0 4px;font-size:16px">3. 広告について</h3>
-  <p>当サイトは第三者配信の広告サービスを利用しています。広告配信事業者は、Cookie等を用いて当サイトや他サイトへのアクセス情報（氏名・住所・メールアドレス等は含まれません）を取得し、広告の表示や効果測定に利用することがあります。Cookieはブラウザの設定で無効にできます。</p>
-  <h3 style="margin:20px 0 4px;font-size:16px">4. 第三者への提供</h3>
-  <p>法令に基づく場合や、不正行為への対応にあたり必要な場合を除き、取得した情報を本人の同意なく第三者へ提供することはありません。</p>
-  <h3 style="margin:20px 0 4px;font-size:16px">5. 保存期間</h3>
-  <p>IPアドレスは不正対応に必要な期間のみ保存し、不要になった時点で削除します。コメントは、管理者が削除するまで表示されます。</p>
-  <h3 style="margin:20px 0 4px;font-size:16px">6. 削除・お問い合わせ</h3>
-  <p>ご自身のコメントの削除や、情報の取り扱いに関するお問い合わせは、コメント欄または管理者へ直接お伝えください。なお、コメント欄に氏名・連絡先などの個人情報を書き込まないでください。書き込まれた場合、管理者が削除することがあります。</p>
-  <h3 style="margin:20px 0 4px;font-size:16px">7. 改定</h3>
-  <p>本ポリシーは、必要に応じて予告なく改定することがあります。（制定：2026年11月27日）</p>
+  <h2 id="pp">利用規約・プライバシーポリシー</h2>
+  <p>当サイトのご利用条件と、利用者の情報の取扱いについては、次のページをご確認ください。</p>
+  <div class="lgl"><a class="fc" href="terms.html"><b>📜 利用規約</b><small>禁止事項・免責事項・投稿情報の扱いなど</small></a><a class="fc" href="privacy.html"><b>🔐 プライバシーポリシー</b><small>取得する情報・利用目的・外部サービスなど</small></a></div>
   <h2>お問い合わせ</h2>
   <p>不具合やご要望は、管理者に直接お伝えください。コメント欄への書き込みでも、意見を受け付けています。</p>
   <h2>おすすめ：STUDIX・たちこくナビneo</h2>
@@ -253,11 +238,12 @@ main{padding:10px 12px 90px}
   <div class="sbw"><p class="osn">STUDIXとたちこくナビneoはオープンソース（STUDIX: <a href="https://github.com/sirius-tool/studix" target="_blank" rel="noopener">github.com/sirius-tool/studix</a>）であり、管理者に学習情報等が抜き取られる心配は一切ございません。ご安心ください。</p><div class="sbnrow"><a class="sbn" href="https://sirius-tool.github.io/studix" target="_blank" rel="noopener">📚 STUDIXを開く →</a><a class="sbn" href="https://sirius-tool.github.io/tknavi-neo" target="_blank" rel="noopener">📝 たちこくナビneoを開く →</a></div></div>
   <p style="margin-top:26px"><a class="btn" href="#home" style="display:inline-block;text-decoration:none">← ホームへ戻る</a></p>
 </main>
-<footer><p id="ft"></p><p>サイトの不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p><a href="#privacy" style="color:var(--a)">プライバシーポリシー</a>　・　<a href="#about" style="color:var(--a)">当サイトについて</a></p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p>
+<footer><p id="ft"></p><p>サイトの不具合・お問い合わせなどは管理者に直接お願いいたします。</p><p><a href="terms.html" style="color:var(--a)">利用規約</a>　・　<a href="privacy.html" style="color:var(--a)">プライバシーポリシー</a>　・　<a href="#about" style="color:var(--a)">当サイトについて</a></p><p>@tachikoku-navi 2026- All right reserved.</p><p style="font-weight:700;color:var(--b)">不正アクセスには断固とした対応を取ります。</p>
 <!-- admax -->
 <script src="https://adm.shinobi.jp/s/dd1c81c89a0db725761bf01383af9a92"></script>
 <!-- admax -->
 <details class="vh"><summary>バージョン履歴</summary><ul>
+<li>2026-11-28　v4.3.0</li>
 <li>2026-11-27　v4.2.0</li>
 <li>2026-11-26　v4.1.0</li>
 <li>2026-11-26　v4.0.0</li>
@@ -395,8 +381,8 @@ const k=e.target.closest('[data-lk]');if(k){const id=k.dataset.lk,on=!LKL.has(id
 const hh=()=>document.documentElement.style.setProperty('--hh',$('header').offsetHeight+'px');hh();addEventListener('resize',hh);document.fonts&&document.fonts.ready.then(hh);
 $('#cmj').onclick=()=>{const ab=isAb();if(ab)location.hash='home';setTimeout(()=>$('#cm').scrollIntoView({behavior:'smooth',block:'start'}),ab?250:0)};
 const tt_=$('#totop');addEventListener('scroll',()=>tt_.classList.toggle('show',scrollY>500),{passive:true});tt_.onclick=()=>scrollTo({top:0,behavior:'smooth'});
-const isAb=()=>location.hash=='#about'||location.hash=='#privacy';
-function route(){const a=isAb();$('#home').hidden=a;$('#ab').hidden=!a;$('#abt').textContent=a?'← ホームへ':'ℹ️ 当サイトについて';scrollTo(0,0);if(location.hash=='#privacy')setTimeout(()=>$('#pp').scrollIntoView(),40);if(!a)setTimeout(ind,30)}
+const isAb=()=>location.hash=='#about';
+function route(){if(location.hash=='#privacy'){location.replace('privacy.html');return}if(location.hash=='#terms'){location.replace('terms.html');return}const a=isAb();$('#home').hidden=a;$('#ab').hidden=!a;$('#abt').textContent=a?'← ホームへ':'ℹ️ 当サイトについて';scrollTo(0,0);if(!a)setTimeout(ind,30)}
 addEventListener('hashchange',route);$('#abt').onclick=()=>{location.hash=isAb()?'home':'about'};route();
 </script>
 <script src="https://ai-sensei.studix-app.workers.dev/embed.js" async></script>
